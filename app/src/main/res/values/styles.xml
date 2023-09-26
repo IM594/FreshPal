@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.NoActionBar" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="backgroundColor">@color/md_theme_light_onPrimary</item>
+
+        <item name="android:statusBarColor">@color/md_theme_light_onPrimary</item>
+<!--        <item name="android:navigationBarColor">@color/md_theme_light_onPrimary</item>-->
+<!--        <item name="colorPrimary">@color/md_theme_light_onPrimary</item>-->
+<!--        <item name="buttonStyle">@style/Widget.Material3.Button</item>-->
+
+
+    </style>
+</resources>
