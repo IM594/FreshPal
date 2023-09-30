@@ -9,7 +9,7 @@ public class Reminder extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.reminder);
+        //setContentView(R.layout.reminder);
 
         //Toolbar toolbar =(Toolbar)findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
