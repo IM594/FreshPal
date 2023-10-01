@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -38,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     private Date selectedDate;
     private String selectedDateStr;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+
+    /* for test reminder page*/
+    Button re;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +80,14 @@ public class MainActivity extends AppCompatActivity {
         // set the status bar to light color (black text)
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
+        // test reminder
+        //re=findViewById(R.id.testButton);
+        //re.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+         //   public void onClick(View view) {
+         //       startActivity(new Intent(MainActivity.this,Reminder.class));
+        //    }
+        //});
     }
 
     public void onAddItemClick(View view) {
