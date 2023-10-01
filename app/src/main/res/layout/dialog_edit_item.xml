@@ -1,0 +1,18 @@
+<!-- res/layout/dialog_edit_item.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter new item name"
+        android:padding="10dp"
+        style="@style/MaterialAlertDialog.Material3"/>
+
+
+
+</LinearLayout>
