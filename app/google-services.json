@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "866630222142",
+    "project_id": "freshpal-fe952",
+    "storage_bucket": "freshpal-fe952.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:866630222142:android:09b227a273d5a5af042c6f",
+        "android_client_info": {
+          "package_name": "comp5216.sydney.edu.au.grocerylist"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoOPI_jJLr3ntleRAcwB0RIi_DKnkm-Hw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
