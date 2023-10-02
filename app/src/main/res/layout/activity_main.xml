@@ -94,4 +94,19 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+<<<<<<< Updated upstream
+=======
+    <Button
+        android:id="@+id/testButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="test" />
+
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="logOut"
+        android:text="Log out" />
+>>>>>>> Stashed changes
 </LinearLayout>
