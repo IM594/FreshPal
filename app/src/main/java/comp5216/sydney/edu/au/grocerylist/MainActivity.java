@@ -83,13 +83,13 @@ public class MainActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         // test reminder
-        //re=findViewById(R.id.testButton);
-        //re.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-         //   public void onClick(View view) {
-         //       startActivity(new Intent(MainActivity.this,Reminder.class));
-        //    }
-        //});
+        re=findViewById(R.id.testButton);
+        re.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,Reminder.class));
+            }
+        });
     }
 
     public void onAddItemClick(View view) {
