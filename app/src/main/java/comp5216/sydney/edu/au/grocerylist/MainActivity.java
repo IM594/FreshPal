@@ -18,6 +18,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -262,5 +264,11 @@ public class MainActivity extends AppCompatActivity {
         calendar.set(year, monthOfYear, dayOfMonth);//set the date
         selectedDate = calendar.getTime();//selectedDate is the date we choose
         return dateFormat.format(selectedDate);//dateFormate.format() : format the date to string
+    }
+    //log out
+    public void logOut(View view){
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(), Login.class));
+        finish();
     }
 }
