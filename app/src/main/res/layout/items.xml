@@ -33,7 +33,8 @@
             android:layout_height="20dp"
             app:layout_constraintStart_toEndOf="@+id/item_name"
             app:layout_constraintTop_toTopOf="@+id/item_name"
-            android:layout_marginStart="10dp" />
+            android:layout_marginStart="10dp"
+            app:srcCompat="@drawable/snow" />
 
         <TextView
             android:id="@+id/expired_days"
