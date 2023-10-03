@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
@@ -11,7 +12,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/item"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        xmlns:tools="http://schemas.android.com/tools"
         android:background="?attr/selectableItemBackground"
         android:orientation="horizontal"
         android:padding="8dp">
@@ -23,8 +23,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             tools:text="Banana"
+            android:textSize="16sp"
             android:maxLines="1" />
 
         <ImageView
@@ -33,6 +34,7 @@
             android:layout_height="20dp"
             app:layout_constraintStart_toEndOf="@+id/item_name"
             app:layout_constraintTop_toTopOf="@+id/item_name"
+            android:layout_marginTop="2dp"
             android:layout_marginStart="10dp"
             app:srcCompat="@drawable/snow" />
 
@@ -42,9 +44,20 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@+id/item_name"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="26dp"
             android:textStyle="bold"
+            android:textSize="20sp"
             tools:text="10" />
+
+        <CheckBox
+            android:id="@+id/switch_opened"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/storage_image"
+            android:layout_marginStart="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Opened"
+            android:textSize="12sp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
