@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_gravity="left"
+        android:background="?attr/colorPrimary"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_backward"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginStart="10dp"
+            android:ellipsize="none"
+            android:singleLine="true"
+            app:srcCompat="@drawable/iconmonstr_arrow_left_lined_240"
+            app:tint="#ffffff" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center"
+            android:text="Settings"
+            android:textColor="#ffffff"
+            android:textSize="20dp" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="26dp">
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enable Reminder: "/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/enable_reminder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enable Preferences: "/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/preferences"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reminder Time: "/>
+
+            <EditText
+                android:id="@+id/default_reminder_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Open Expire Time: "/>
+
+            <EditText
+                android:id="@+id/default_Open_Expire_Time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time Zone: "/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.FilterSpinner"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center"
+            android:text="Last Sync Time: "
+            android:textSize="12sp"
+            android:textColor="@color/greySecondary"
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:background="?attr/colorPrimary">
+
+        <ImageButton
+            android:id="@+id/imageButton_home"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_weight="1"
+            android:background="?attr/colorPrimary"
+            android:layout_gravity="center_vertical"
+            app:srcCompat="@drawable/list_white" />
+
+        <ImageButton
+            android:id="@+id/imageButton_add"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/colorPrimary"
+            app:srcCompat="@drawable/add_white" />
+
+        <ImageButton
+            android:id="@+id/imageButton_profile"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:background="@color/md_theme_light_surface"
+            app:srcCompat="@drawable/profile" />
+
+    </LinearLayout>
+
+</LinearLayout>

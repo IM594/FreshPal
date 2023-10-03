@@ -36,7 +36,7 @@
             app:layout_constraintTop_toTopOf="@+id/item_name"
             android:layout_marginTop="2dp"
             android:layout_marginStart="10dp"
-            app:srcCompat="@drawable/snow" />
+            app:srcCompat="@drawable/sun" />
 
         <TextView
             android:id="@+id/expired_days"

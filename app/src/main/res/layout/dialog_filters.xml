@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/filters_form"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Filter" />
+
+    <!-- Category -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_category"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:tint="@color/greySecondary"
+            android:text="Category: "
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/spinner_category"
+            style="@style/AppTheme.FilterSpinner" />
+
+    </LinearLayout>
+
+    <!-- Storage -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_storage"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:tint="@color/greySecondary"
+            android:text="Storage Method: "
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/spinner_storage"
+            style="@style/AppTheme.FilterSpinner" />
+
+    </LinearLayout>
+
+    <!-- expire days -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_expire_from"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:tint="@color/greySecondary"
+            android:text="Expire days from: "
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/spinner_from"
+            style="@style/AppTheme.FilterSpinner"
+            android:layout_width="115dp" />
+
+        <TextView
+            android:id="@+id/text_expire_to"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:tint="@color/greySecondary"
+            android:text="to: "
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/spinner_to"
+            style="@style/AppTheme.FilterSpinner"
+            android:layout_width="115dp" />
+
+    </LinearLayout>
+
+    <!-- Product name -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_Product_name"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:tint="@color/greySecondary"
+            android:text="Product Name: "
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/spinner_sort"
+            style="@style/AppTheme.FilterSpinner"
+            android:layout_centerVertical="true" />
+    </LinearLayout>
+
+    <!-- Cancel and apply buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/button_cancel"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:textColor="@color/greySecondary"/>
+
+        <Button
+            android:id="@+id/button_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Apply"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+
