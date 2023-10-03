@@ -82,12 +82,12 @@ public class MainActivity extends AppCompatActivity {
         // set the status bar to light color (black text)
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
-        // test reminder
+        // test profile
         re=findViewById(R.id.testButton);
         re.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,Reminder.class));
+                startActivity(new Intent(MainActivity.this,Profile.class));
             }
         });
     }

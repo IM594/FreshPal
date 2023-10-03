@@ -27,7 +27,9 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".MainActivity">
         </activity>
-        
+        <activity android:name=".Profile"
+            android:exported="true">
+        </activity>
         <activity
             android:name=".Register"
             android:exported="true">
