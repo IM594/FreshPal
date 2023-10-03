@@ -28,7 +28,22 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CompletableFuture;
 
+import comp5216.sydney.edu.au.grocerylist.data.dao.FoodDao;
+import comp5216.sydney.edu.au.grocerylist.data.dao.UserDao;
+import comp5216.sydney.edu.au.grocerylist.data.database.FreshPalDB;
+
 public class MainActivity extends AppCompatActivity {
+
+
+    private FreshPalDB freshPalDB;
+    private UserDao userDao;
+    private FoodDao foodDao;
+
+//    FreshPalDB freshPalDB = FreshPalDB.getDatabase(getApplicationContext());
+//    UserDao userDao = freshPalDB.userDao();
+//    FoodDao foodDao = freshPalDB.foodDao();
+
+    //下面是旧的
 
     private GroceryDB db;
     private GroceryDao groceryDao;
@@ -54,6 +69,14 @@ public class MainActivity extends AppCompatActivity {
         addItemEditText = findViewById(R.id.editTextItem);
         recyclerView = findViewById(R.id.recyclerView);
         datePicker = findViewById(R.id.datePicker);
+
+        //新的 ---
+
+        freshPalDB = FreshPalDB.getDatabase(getApplicationContext());
+        userDao = freshPalDB.userDao();
+        foodDao = freshPalDB.foodDao();
+
+        //新的 ---
 
         db = GroceryDB.getDatabase(getApplicationContext());
         groceryDao = db.groceryDao();
