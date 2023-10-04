@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">GroceryList</string>
+    <!-- Login Activity -->
+    <string name="email_required">Email is required.</string>
+    <string name="password_required">Password is required.</string>
+    <string name="login_complete">Login complete.</string>
+    <string name="email_not_verified">Your email is not verified.</string>
+    <string name="login_error">Error: </string>
+    <string name="reset_password">Reset Password?</string>
+    <string name="enter_email_for_reset">Enter your Email to receive Reset Link</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="reset_link_sent">Reset Link sent to your email.</string>
+    <string name="reset_link_not_sent">Reset Link is not sent due to </string>
+
+
 </resources>

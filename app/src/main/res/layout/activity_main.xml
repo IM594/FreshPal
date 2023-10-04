@@ -101,6 +101,13 @@
         android:text="test" />
 
     <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addFoodButton"
+        android:text="Add Food"
+        android:onClick="addFood" />
+
+    <Button
         android:id="@+id/logoutBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     /* for test reminder page*/
     Button re;
+    Button addFoodButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +70,21 @@ public class MainActivity extends AppCompatActivity {
         addItemEditText = findViewById(R.id.editTextItem);
         recyclerView = findViewById(R.id.recyclerView);
         datePicker = findViewById(R.id.datePicker);
+        addFoodButton = findViewById(R.id.addFoodButton);
 
         //新的 ---
 
         freshPalDB = FreshPalDB.getDatabase(getApplicationContext());
         userDao = freshPalDB.userDao();
         foodDao = freshPalDB.foodDao();
+
+        //跳转到AddFood，测试用
+        addFoodButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, AddFood.class));
+            }
+        });
 
         //新的 ---
 
