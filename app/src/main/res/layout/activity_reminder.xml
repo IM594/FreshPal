@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_gravity="left"
@@ -35,7 +35,7 @@
             android:textColor="#ffffff"
             android:textSize="20dp" />
 
-    </LinearLayout>
+    </FrameLayout>
 
     <TextView
         android:id="@+id/textView1"
