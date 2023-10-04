@@ -102,9 +102,9 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="text"
-                    android:text="Enter the product name"
+                    android:hint="Enter the product name"
                     android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray" />
+                    />
             </LinearLayout>
 
             <!-- Category -->
@@ -134,9 +134,9 @@
                         android:layout_weight="1"
                         android:ems="10"
                         android:inputType="text"
-                        android:text="Enter the product category"
+                        android:hint="Enter the product category"
                         android:textSize="14sp"
-                        android:textColor="@android:color/darker_gray" />
+                        />
 
                     <ImageButton
                         android:id="@+id/imageButton_category_camera"
@@ -175,9 +175,9 @@
                         android:layout_weight="1"
                         android:ems="10"
                         android:inputType="text"
-                        android:text="mm/dd/yyyy"
+                        android:hint="mm/dd/yyyy"
                         android:textSize="14sp"
-                        android:textColor="@android:color/darker_gray" />
+                         />
 
                     <ImageButton
                         android:id="@+id/imageButton_calendar"
@@ -218,9 +218,9 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="text"
-                    android:text="Enter the store location"
+                    android:hint="Enter the store location"
                     android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray" />
+                    />
             </LinearLayout>
 
             <!-- Storage Condition -->

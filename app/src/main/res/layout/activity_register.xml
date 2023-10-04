@@ -10,7 +10,7 @@
         android:id="@+id/sign_up"
         android:layout_width="127dp"
         android:layout_height="48dp"
-        android:text="Sign In"
+        android:text="Sign Up"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
