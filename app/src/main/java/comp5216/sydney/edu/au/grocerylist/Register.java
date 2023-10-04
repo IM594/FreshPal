@@ -1,5 +1,6 @@
 package comp5216.sydney.edu.au.grocerylist;
 
+// 导入必要的包
 import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
@@ -23,12 +24,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import comp5216.sydney.edu.au.grocerylist.data.database.FreshPalDB;
+import comp5216.sydney.edu.au.grocerylist.data.entities.User;
+import comp5216.sydney.edu.au.grocerylist.data.dao.UserDao;
+
 public class Register extends AppCompatActivity {
     EditText mFullName, mEmail, mPasssword, mPasswordCheck;
     Button mRegisterBtn;
     TextView mLoginBtn;
     FirebaseAuth fAuth;
-
+    private FreshPalDB freshPalDB;
+    private UserDao userDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,10 @@ public class Register extends AppCompatActivity {
         mRegisterBtn = findViewById(R.id.signUpButton);
         mLoginBtn = findViewById(R.id.tapToSignup);
         fAuth = FirebaseAuth.getInstance();
+
+        // 初始化 Room 数据库和 UserDao
+        freshPalDB = FreshPalDB.getDatabase(getApplicationContext());
+        userDao = freshPalDB.userDao();
 
         if(fAuth.getCurrentUser() != null){
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -71,18 +81,17 @@ public class Register extends AppCompatActivity {
                     return;
                 }
 
-                // register the user in firebase
+                // 注册用户到 Firebase Authentication
                 fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            //send verification link
+                            // 发送验证链接
                             FirebaseUser user = fAuth.getCurrentUser();
                             user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
                                     Toast.makeText(Register.this, "Verification Email has been Sent.",Toast.LENGTH_SHORT).show();
-
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -91,8 +100,25 @@ public class Register extends AppCompatActivity {
                                 }
                             });
                             Toast.makeText(Register.this, "Sign up complete.", Toast.LENGTH_SHORT).show();
+
+                            // 创建 User 对象并插入到本地数据库
+                            User localUser = new User();
+                            localUser.setUserID(user.getUid()); // 使用 Firebase 用户ID
+                            localUser.setUsername(mFullName.getText().toString()); // 使用 mFullName 中的文本作为用户名
+                            localUser.setEmail(email);
+                            localUser.setReminderEnabled(false); // 设置其他字段
+
+
+                            // 异步插入 User 对象到本地数据库
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    userDao.insertUser(localUser);
+                                }
+                            }).start();
+
                             startActivity(new Intent(getApplicationContext(), Login.class));
-                        }else{
+                        } else {
                             Toast.makeText(Register.this, "Error!: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
