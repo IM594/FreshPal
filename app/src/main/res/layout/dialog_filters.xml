@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             app:tint="@color/greySecondary"
-            android:text="Storage Method: "
+            android:text="Storage Condition: "
             android:textSize="16sp" />
 
         <Spinner
@@ -65,10 +65,11 @@
             android:text="Expire days from: "
             android:textSize="16sp" />
 
-        <Spinner
-            android:id="@+id/spinner_from"
+        <EditText
+            android:id="@+id/input_from"
             style="@style/AppTheme.FilterSpinner"
-            android:layout_width="115dp" />
+            android:layout_width="115dp"
+            android:inputType="number" />
 
         <TextView
             android:id="@+id/text_expire_to"
@@ -78,10 +79,11 @@
             android:text="to: "
             android:textSize="16sp" />
 
-        <Spinner
-            android:id="@+id/spinner_to"
+        <EditText
+            android:id="@+id/input_to"
             style="@style/AppTheme.FilterSpinner"
-            android:layout_width="115dp" />
+            android:layout_width="115dp"
+            android:inputType="number" />
 
     </LinearLayout>
 
@@ -99,7 +101,7 @@
             android:textSize="16sp" />
 
         <Spinner
-            android:id="@+id/spinner_sort"
+            android:id="@+id/spinner_name"
             style="@style/AppTheme.FilterSpinner"
             android:layout_centerVertical="true" />
     </LinearLayout>
