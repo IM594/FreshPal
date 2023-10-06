@@ -33,8 +33,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:targetApi="31">
-        <activity
-            android:name=".CloudVisionLabelingActivity"
+<!--        <activity-->
+<!--            android:name=".CloudVisionLabelingActivity"-->
+<!--            android:exported="false" />-->
+        <activity android:name=".CloudOCRActivity"
             android:exported="false" />
         <activity
             android:name=".OCRImageProcessingActivity"

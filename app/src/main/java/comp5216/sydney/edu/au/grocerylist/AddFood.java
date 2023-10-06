@@ -191,6 +191,13 @@ public class AddFood extends AppCompatActivity {
             expiredDateInput.setText(extractedDate);
             Toast.makeText(AddFood.this, "Date added successfully: " + extractedDate, Toast.LENGTH_SHORT).show();
         }
+
+        // 如果接收到了日期提取失败的提示码，则自动点击日期按钮
+        if (requestCode == REQUEST_DATE_IMAGE_CAPTURE && resultCode == RESULT_CANCELED) {
+            // 从OCRImageProcessingActivity接收结果
+            Toast.makeText(AddFood.this, "Date extraction failed.", Toast.LENGTH_SHORT).show();
+            showDatePickerDialog();
+        }
     }
 
     // 显示日期选择器对话框
