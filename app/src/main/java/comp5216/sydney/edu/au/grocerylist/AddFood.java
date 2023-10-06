@@ -179,6 +179,7 @@ public class AddFood extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // 如果接收到了标签识别成功的提示码，则自动点击标签按钮
         if (requestCode == REQUEST_IMAGE_LABELING && resultCode == RESULT_OK && data != null) {
             // 从ImageLabelingActivity接收结果
             String selectedCategory = data.getStringExtra("category");
@@ -186,6 +187,14 @@ public class AddFood extends AppCompatActivity {
             Toast.makeText(AddFood.this, "Category added successfully: " + selectedCategory, Toast.LENGTH_SHORT).show();
         }
 
+        // 如果接收到了标签识别失败的提示码，则自动点击输入框，让用户手动输入
+        if (requestCode == REQUEST_IMAGE_LABELING && resultCode == RESULT_CANCELED) {
+            // 从ImageLabelingActivity接收结果
+            Toast.makeText(AddFood.this, "Category extraction failed.", Toast.LENGTH_SHORT).show();
+            categoryInput.requestFocus();
+        }
+
+        // 如果接收到了标签识别失败的提示码，则自动点击标签按钮
         if (requestCode == REQUEST_DATE_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
             // 从OCRImageProcessingActivity接收结果
             String extractedDate = data.getStringExtra("extractedDate");
