@@ -1,11 +1,12 @@
 package comp5216.sydney.edu.au.grocerylist;
 
 // 导入所需的包
-
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -26,6 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class AddFood extends AppCompatActivity {
@@ -33,7 +35,7 @@ public class AddFood extends AppCompatActivity {
     Spinner storageConditionSpinner;
     RadioGroup foodSealedStatusGroup;
     Button saveButton;
-    ImageButton labelImageButton, dateCameraButton;
+    ImageButton labelImageButton, dateCameraButton, calendarButton;
 
     private static final int REQUEST_IMAGE_LABELING = 1;
     private static final int REQUEST_DATE_IMAGE_CAPTURE = 2;
@@ -59,13 +61,14 @@ public class AddFood extends AppCompatActivity {
 
         labelImageButton = findViewById(R.id.imageButton_category_camera);
         dateCameraButton = findViewById(R.id.imageButton_expired_date_camera);
+        calendarButton = findViewById(R.id.imageButton_calendar);
         saveButton = findViewById(R.id.save_button);
 
         // 初始化 Room 数据库和 FoodDao
         freshPalDB = FreshPalDB.getDatabase(getApplicationContext());
         foodDao = freshPalDB.foodDao();
 
-        // 各个按钮的点击事件
+        // Category 拍照识别按钮
         labelImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,6 +78,16 @@ public class AddFood extends AppCompatActivity {
             }
         });
 
+        // Expired Date 手动日期选择按钮
+        calendarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePickerDialog();
+            }
+        });
+
+
+        // Expired Date 拍照识别按钮
         dateCameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,6 +97,7 @@ public class AddFood extends AppCompatActivity {
             }
         });
 
+        // 保存按钮
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -170,6 +184,30 @@ public class AddFood extends AppCompatActivity {
             Toast.makeText(AddFood.this, "Date added successfully: " + extractedDate, Toast.LENGTH_SHORT).show();
         }
     }
+
+    // 显示日期选择器对话框
+    private void showDatePickerDialog() {
+        // 获取当前日期
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        // 创建日期选择器对话框
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
+                        // 在日期选择后更新输入框的文本
+                        String formattedDate = String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear);
+                        expiredDateInput.setText(formattedDate);
+                    }
+                }, year, month, day);
+
+        // 显示日期选择器对话框
+        datePickerDialog.show();
+    }
+
 
     // 根据expiredDate计算bestBefore
     private long calculateBestBefore(String expiredDate) {
