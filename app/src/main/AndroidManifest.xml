@@ -36,8 +36,8 @@
 <!--        <activity-->
 <!--            android:name=".CloudVisionLabelingActivity"-->
 <!--            android:exported="false" />-->
-        <activity android:name=".CloudOCRActivity"
-            android:exported="false" />
+<!--        <activity android:name=".CloudOCRActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".OCRImageProcessingActivity"
             android:exported="false" />

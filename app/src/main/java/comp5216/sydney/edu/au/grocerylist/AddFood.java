@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -34,7 +35,7 @@ import java.util.Date;
 public class AddFood extends AppCompatActivity {
     EditText productNameInput, categoryInput, expiredDateInput, storeLocationInput;
     Spinner storageConditionSpinner;
-    RadioGroup foodSealedStatusGroup;
+    CheckBox foodOpenedStatus;
     Button saveButton;
     ImageButton labelImageButton, dateCameraButton, calendarButton;
 
@@ -60,7 +61,7 @@ public class AddFood extends AppCompatActivity {
         storeLocationInput = findViewById(R.id.store_location_input);
 
         storageConditionSpinner = findViewById(R.id.storage_condition_spinner);
-        foodSealedStatusGroup = findViewById(R.id.food_sealed_status_group);
+        foodOpenedStatus = findViewById(R.id.check_box_opened);
 
         labelImageButton = findViewById(R.id.imageButton_category_camera);
         dateCameraButton = findViewById(R.id.imageButton_expired_date_camera);
@@ -121,11 +122,11 @@ public class AddFood extends AppCompatActivity {
                     String expiredDate = expiredDateInput.getText().toString().trim();
                     String storeLocation = storeLocationInput.getText().toString().trim();
                     String storageCondition = storageConditionSpinner.getSelectedItem().toString();
-                    Boolean isSealed = foodSealedStatusGroup.getCheckedRadioButtonId() == R.id.radio_sealed;
+                    Boolean isOpened = foodOpenedStatus.isChecked();
 
 
                     // 检查是否有输入为空，如果有则提示用户
-                    if (productName.isEmpty() || category.isEmpty() || expiredDate.isEmpty() || storeLocation.isEmpty() || isSealed == null) {
+                    if (productName.isEmpty() || category.isEmpty() || expiredDate.isEmpty() || storeLocation.isEmpty() ) {
                         Toast.makeText(AddFood.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
                     } else {
                         // 获取当前登录用户的userID
@@ -141,7 +142,7 @@ public class AddFood extends AppCompatActivity {
                             food.setCategory(category);
                             food.setStorageLocation(storeLocation);
                             food.setStorageCondition(storageCondition);
-                            food.setOpened(isSealed);
+                            food.setOpened(isOpened);
                             food.setAddTime(System.currentTimeMillis());
                             food.setBestBefore(calculateBestBefore(expiredDate));//如果是0，说明日期格式不对
 

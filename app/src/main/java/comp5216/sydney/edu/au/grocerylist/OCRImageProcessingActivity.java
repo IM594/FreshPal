@@ -3,6 +3,7 @@ package comp5216.sydney.edu.au.grocerylist;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -78,7 +79,7 @@ public class OCRImageProcessingActivity extends AppCompatActivity {
     // 启动相机应用以拍摄照片
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) { // 检查是否有相机应用
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
@@ -96,17 +97,18 @@ public class OCRImageProcessingActivity extends AppCompatActivity {
     }
 
     // 处理拍摄的照片
+    // 处理拍摄的照片
     private void processImageForText() {
         if (imageView.getDrawable() == null) {
             Toast.makeText(this, "Please capture an image first.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        imageView.setDrawingCacheEnabled(true);
-        imageView.buildDrawingCache();
-        Bitmap bitmap = imageView.getDrawingCache();
+        // 获取原始图像
+        BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
+        Bitmap originalBitmap = drawable.getBitmap();
 
-        InputImage image = InputImage.fromBitmap(bitmap, 0);
+        InputImage image = InputImage.fromBitmap(originalBitmap, 0);
 
         TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
                 .process(image)
@@ -122,27 +124,23 @@ public class OCRImageProcessingActivity extends AppCompatActivity {
                         // 如果没有提取到日期，则提示用户，自动返回上一个activity，返回一个提示码，然后在上一个activity中自动点击日期按钮
                         if (extractedDates.size() == 0) {
                             Toast.makeText(OCRImageProcessingActivity.this, "No date found in the image.", Toast.LENGTH_SHORT).show();
-//                            setResult(RESULT_CANCELED);
-//                            finish();
-//                            return;
                         } else if (extractedDates.size() == 1) {
                             // 如果只提取到一个日期，则直接返回该日期
                             Intent resultIntent = new Intent();
                             resultIntent.putExtra("extractedDate", extractedDates.get(0));
                             setResult(RESULT_OK, resultIntent);
                             finish();
-                            return;
+                        } else {
+                            // 让用户选择正确的日期
+                            showDateOptions(extractedDates);
                         }
-
-
-                        // 让用户选择正确的日期
-                        showDateOptions(extractedDates);
                     }
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Text recognition failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
+
 
     // 定义日期正则表达式和对应的日期格式
     private static final Map<String, String> DATE_FORMATS = new HashMap<>();

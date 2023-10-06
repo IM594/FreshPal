@@ -174,33 +174,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp" />
 
-            <!-- Food Sealed Status -->
-            <TextView
-                android:id="@+id/food_sealed_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Is the food sealed?"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
-
-            <RadioGroup
-                android:id="@+id/food_sealed_status_group"
+            <!-- Food Opened Status -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
 
-                <RadioButton
-                    android:id="@+id/radio_sealed"
+                <TextView
+                    android:id="@+id/food_opened_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sealed" />
+                    android:text="Is the food opened?"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_weight="1" /> <!-- 设置权重为 1，使其占据可用空间的一部分 -->
 
-                <RadioButton
-                    android:id="@+id/radio_not_sealed"
+                <CheckBox
+                    android:id="@+id/check_box_opened"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Not Sealed" />
-            </RadioGroup>
+                    android:checked="false" /> <!-- 默认未选中表示已开封，如果已开封则设置为 true -->
+            </LinearLayout>
+
+
 
             <!-- Save Button -->
             <Button
