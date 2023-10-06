@@ -13,6 +13,11 @@
     <string name="reset_link_sent">Reset Link sent to your email.</string>
     <string name="reset_link_not_sent">Reset Link is not sent due to </string>
 
+    <string name="value_any_category">All Category</string>
+    <string name="value_any_storage">All Storage Conditions</string>
+    <string name="value_any_product">Any product</string>
+    <string name="all_items">All Items</string>
+    
     <string-array name="storage_conditions">
         <item>Outdoor</item>
         <item>Refrigerator</item>
