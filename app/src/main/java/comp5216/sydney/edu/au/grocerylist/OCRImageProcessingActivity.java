@@ -97,7 +97,6 @@ public class OCRImageProcessingActivity extends AppCompatActivity {
     }
 
     // 处理拍摄的照片
-    // 处理拍摄的照片
     private void processImageForText() {
         if (imageView.getDrawable() == null) {
             Toast.makeText(this, "Please capture an image first.", Toast.LENGTH_SHORT).show();
@@ -124,6 +123,27 @@ public class OCRImageProcessingActivity extends AppCompatActivity {
                         // 如果没有提取到日期，则提示用户，自动返回上一个activity，返回一个提示码，然后在上一个activity中自动点击日期按钮
                         if (extractedDates.size() == 0) {
                             Toast.makeText(OCRImageProcessingActivity.this, "No date found in the image.", Toast.LENGTH_SHORT).show();
+                            //询问用户是否重新拍照，还是自己手动输入日期。如果要手动输入，自动返回上一个activity，返回一个提示码，然后在上一个activity中自动点击日期按钮
+                            AlertDialog.Builder builder = new AlertDialog.Builder(OCRImageProcessingActivity.this);
+                            builder.setTitle("No date found in the image.");
+                            builder.setMessage("Do you want to take another photo or enter the date manually?");
+                            builder.setPositiveButton("Take another photo", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dispatchTakePictureIntent();
+                                }
+                            });
+                            builder.setNegativeButton("Enter manually", new DialogInterface.OnClickListener() {//返回一个提示码，然后在上一个activity中自动点击日期按钮
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent resultIntent = new Intent();
+                                    resultIntent.putExtra("extractedDate", "manual");
+                                    setResult(RESULT_CANCELED, resultIntent);
+                                    finish();
+                                }
+                            });
+                            builder.show();
+
                         } else if (extractedDates.size() == 1) {
                             // 如果只提取到一个日期，则直接返回该日期
                             Intent resultIntent = new Intent();
@@ -251,6 +271,16 @@ public class OCRImageProcessingActivity extends AppCompatActivity {
             }
         });
 
+        //如果没有一个是正确的，询问用户是否手动输入日期
+        builder.setNegativeButton("Enter manually", new DialogInterface.OnClickListener() {//返回一个提示码，然后在上一个activity中自动点击日期按钮
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("extractedDate", "manual");
+                setResult(RESULT_CANCELED, resultIntent);
+                finish();
+            }
+        });
         builder.show();
     }
 
