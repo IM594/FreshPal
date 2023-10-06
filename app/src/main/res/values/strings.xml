@@ -14,9 +14,9 @@
     <string name="reset_link_not_sent">Reset Link is not sent due to </string>
 
     <string-array name="storage_conditions">
-        <item>Option 1</item>
-        <item>Option 2</item>
-        <item>Option 3</item>
+        <item>Outdoor</item>
+        <item>Refrigerator</item>
+        <item>Freezer</item>
         <!-- 添加更多选项 -->
     </string-array>
 

@@ -244,7 +244,7 @@ public class AddFood extends AppCompatActivity {
         }
     }
 
-    // setupStorageConditionSpinner
+    // 用来设置Storage Condition Spinner
     private void setupStorageConditionSpinner() {
         // 创建一个适配器来显示选项
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,

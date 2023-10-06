@@ -51,6 +51,11 @@ public class ImageLabelingActivity extends AppCompatActivity {
         // 初始化图像标签器
         imageLabeler = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS);
 
+        // 如果存在相机权限，则直接启动相机应用
+        if (marshmallowPermission.checkPermissionForCamera()) {
+            dispatchTakePictureIntent();
+        }
+
         takePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
