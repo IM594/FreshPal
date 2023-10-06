@@ -51,6 +51,11 @@ public class ImageLabelingActivity extends AppCompatActivity {
         // 初始化图像标签器
         imageLabeler = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS);
 
+        // 如果存在相机权限，则直接启动相机应用
+        if (marshmallowPermission.checkPermissionForCamera()) {
+            dispatchTakePictureIntent();
+        }
+
         takePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,6 +137,53 @@ public class ImageLabelingActivity extends AppCompatActivity {
                                     //然后关闭activity，返回上一个activity，即AddFood，然后在AddFood中将选择的文本填入categoryInput
                                 }
 
+                            });
+
+                            // 如果没有一个标签被识别出来，则显示一个对话框提示用户，并让用户选择是否重新识别还是手动输入
+                            if (labels.size() == 0) {
+                                builder.setMessage("No label detected. Do you want to try again or enter manually?");
+                                builder.setPositiveButton("Try again", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dispatchTakePictureIntent();
+                                    }
+                                });
+                                builder.setNegativeButton("Enter manually", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        // 打开手动输入界面
+//                                        categoryInput.setText("");
+                                        //填入文本框
+                                        Intent intent = new Intent();
+                                        intent.putExtra("category", "");
+                                        setResult(RESULT_CANCELED, intent);
+                                        finish();
+                                        //然后关闭activity，返回上一个activity，即AddFood，然后在AddFood中将选择的文本填入categoryInput
+                                    }
+                                });
+                            }
+
+                            // 增加手动输入按钮，点击后打开手动输入界面
+                            builder.setNeutralButton("Enter manually", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    // 打开手动输入界面
+//                                    categoryInput.setText("");
+                                    //填入文本框
+                                    Intent intent = new Intent();
+                                    intent.putExtra("category", "");
+                                    setResult(RESULT_CANCELED, intent);
+                                    finish();
+                                    //然后关闭activity，返回上一个activity，即AddFood，然后在AddFood中将选择的文本填入categoryInput
+                                }
+                            });
+
+                            // 重新识别按钮，点击后重新识别
+                            builder.setNegativeButton("Try again", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dispatchTakePictureIntent();
+                                }
                             });
 
                             builder.create().show();
