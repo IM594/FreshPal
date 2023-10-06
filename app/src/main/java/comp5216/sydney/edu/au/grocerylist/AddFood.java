@@ -37,7 +37,7 @@ public class AddFood extends AppCompatActivity {
     Spinner storageConditionSpinner;
     CheckBox foodOpenedStatus;
     Button saveButton;
-    ImageButton labelImageButton, dateCameraButton, calendarButton;
+    ImageButton labelImageButton, dateCameraButton, calendarButton,backButton;
 
     private static final int REQUEST_IMAGE_LABELING = 1;
     private static final int REQUEST_DATE_IMAGE_CAPTURE = 2;
@@ -63,6 +63,7 @@ public class AddFood extends AppCompatActivity {
         storageConditionSpinner = findViewById(R.id.storage_condition_spinner);
         foodOpenedStatus = findViewById(R.id.check_box_opened);
 
+        backButton = findViewById(R.id.iv_backward);
         labelImageButton = findViewById(R.id.imageButton_category_camera);
         dateCameraButton = findViewById(R.id.imageButton_expired_date_camera);
         calendarButton = findViewById(R.id.imageButton_calendar);
@@ -71,6 +72,14 @@ public class AddFood extends AppCompatActivity {
         // 初始化 Room 数据库和 FoodDao
         freshPalDB = FreshPalDB.getDatabase(getApplicationContext());
         foodDao = freshPalDB.foodDao();
+
+        // 单击返回，返回上一页
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         // Category 拍照识别按钮
         labelImageButton.setOnClickListener(new View.OnClickListener() {

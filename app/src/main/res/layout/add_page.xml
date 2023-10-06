@@ -3,24 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="0dp">
 
     <!-- Top Bar -->
     <LinearLayout
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
         android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center_vertical">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/iv_backward"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            app:srcCompat="@drawable/iconmonstr_arrow_left_lined_240"
-            app:tint="#ffffff" />
+            android:layout_marginStart="0dp"
+        app:srcCompat="@drawable/back"
+        android:background="@drawable/rounded_button_background"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:tint="#000000" />
+
 
         <TextView
             android:id="@+id/tv_title"
@@ -29,8 +34,16 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Product Detail"
-            android:textColor="#ffffff"
-            android:textSize="20sp" />
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            app:tint="#000000" />
 
     </LinearLayout>
 
@@ -103,7 +116,7 @@
                 android:id="@+id/expired_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Expired Date"
+                android:text="Best Before"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginTop="16dp" />
@@ -120,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:inputType="text"
-                    android:hint="mm/dd/yyyy"
+                    android:hint="dd/mm/yyyy"
                     android:textSize="16sp" />
 
                 <ImageButton
@@ -205,46 +218,101 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="24dp"
-                android:text="SAVE" />
+                android:layout_marginTop="40dp"
+                android:text="ADD" />
 
         </LinearLayout>
 
     </ScrollView>
 
     <!-- Bottom Navigation -->
+    <!-- 底部导航栏 -->
     <LinearLayout
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="70dp"
         android:background="?attr/colorPrimary"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true">
 
-        <ImageButton
-            android:id="@+id/imageButton_home"
+        <!-- 主页按钮 -->
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="55dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="?attr/colorPrimary"
-            app:srcCompat="@drawable/list_white" />
+            android:gravity="center"
+            android:background="@color/cardview_light_background"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground">
 
-        <ImageButton
-            android:id="@+id/imageButton_add"
+            <ImageView
+                android:id="@+id/imageButton_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/home"
+                app:tint="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- 添加按钮 -->
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="55dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/md_theme_light_surface"
-            app:srcCompat="@drawable/add" />
+            android:gravity="center"
+            android:background="@color/cardview_light_background"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground">
 
-        <ImageButton
-            android:id="@+id/imageButton_profile"
+            <ImageView
+                android:id="@+id/imageButton_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/add"
+                app:tint="?attr/colorPrimary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- 个人资料按钮 -->
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="55dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="?attr/colorPrimary"
-            app:srcCompat="@drawable/profile_white" />
+            android:gravity="center"
+            android:background="@color/cardview_light_background"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground">
 
+            <ImageView
+                android:id="@+id/imageButton_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/profile"
+                app:tint="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+        </LinearLayout>
     </LinearLayout>
+
 
 </RelativeLayout>
