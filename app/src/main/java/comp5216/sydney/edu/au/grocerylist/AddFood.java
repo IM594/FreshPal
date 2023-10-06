@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -49,6 +50,8 @@ public class AddFood extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_page);
 
+        // set the status bar to light color (black text)
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         // 初始化各个控件
         productNameInput = findViewById(R.id.product_name_input);
@@ -97,6 +100,9 @@ public class AddFood extends AppCompatActivity {
             }
         });
 
+        // 设置Storage Condition Spinner
+        setupStorageConditionSpinner();
+
         // 保存按钮
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +120,7 @@ public class AddFood extends AppCompatActivity {
                     String category = categoryInput.getText().toString().trim();
                     String expiredDate = expiredDateInput.getText().toString().trim();
                     String storeLocation = storeLocationInput.getText().toString().trim();
-//                    String storageCondition = storageConditionSpinner.getSelectedItem().toString();
+                    String storageCondition = storageConditionSpinner.getSelectedItem().toString();
                     Boolean isSealed = foodSealedStatusGroup.getCheckedRadioButtonId() == R.id.radio_sealed;
 
 
@@ -134,7 +140,7 @@ public class AddFood extends AppCompatActivity {
                             food.setFoodName(productName);
                             food.setCategory(category);
                             food.setStorageLocation(storeLocation);
-//                            food.setStorageCondition(storageCondition);
+                            food.setStorageCondition(storageCondition);
                             food.setOpened(isSealed);
                             food.setAddTime(System.currentTimeMillis());
                             food.setBestBefore(calculateBestBefore(expiredDate));//如果是0，说明日期格式不对
@@ -163,6 +169,8 @@ public class AddFood extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     // 处理从ImageLabelingActivity和OCRImageProcessingActivity返回的结果，填充到相应的输入框中
@@ -234,10 +242,20 @@ public class AddFood extends AppCompatActivity {
             e.printStackTrace();
             return 0;
         }
-
-
     }
 
-    //
+    // setupStorageConditionSpinner
+    private void setupStorageConditionSpinner() {
+        // 创建一个适配器来显示选项
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.storage_conditions, android.R.layout.simple_spinner_item);
+
+        // 设置下拉菜单样式
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // 将适配器与spinner绑定
+        storageConditionSpinner.setAdapter(adapter);
+    }
+
 
 }
