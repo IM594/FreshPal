@@ -90,8 +90,15 @@
 
             <EditText
                 android:id="@+id/default_reminder_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_width="129dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="days" />
 
         </LinearLayout>
 
@@ -107,8 +114,15 @@
 
             <EditText
                 android:id="@+id/default_Open_Expire_Time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_width="112dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="days" />
 
         </LinearLayout>
 
@@ -123,20 +137,22 @@
                 android:text="Time Zone: "/>
 
             <Spinner
+                android:id="@+id/timezonelist"
+                style="@style/AppTheme.FilterSpinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/AppTheme.FilterSpinner"/>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
         <TextView
+            android:id="@+id/lastsynctime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:gravity="center_horizontal|center"
             android:text="Last Sync Time: "
-            android:textSize="12sp"
             android:textColor="@color/greySecondary"
-            android:layout_marginTop="20dp"/>
+            android:textSize="12sp" />
 
     </LinearLayout>
 

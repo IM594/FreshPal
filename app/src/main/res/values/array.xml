@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="australian_time_zones">
+        <item>Australia/Sydney</item>
+        <item>Australia/Melbourne</item>
+        <item>Australia/Brisbane</item>
+        <item>Australia/Adelaide</item>
+        <item>Australia/Perth</item>
+        <item>Australia/Hobart</item>
+        <item>Australia/Darwin</item>
+    </string-array>
+</resources>

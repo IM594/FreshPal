@@ -39,6 +39,9 @@
 <!--        <activity android:name=".CloudOCRActivity"-->
 <!--            android:exported="false" />-->
         <activity
+            android:name=".Settings"
+            android:exported="false" />
+        <activity
             android:name=".OCRImageProcessingActivity"
             android:exported="false" />
 
