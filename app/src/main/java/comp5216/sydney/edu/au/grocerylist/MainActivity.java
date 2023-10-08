@@ -304,4 +304,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), Login.class));
         finish();
     }
+    //profile
+    public void profileOnclick(View view){
+        startActivity(new Intent(getApplicationContext(), Profile.class));
+        finish();
+    }
 }
