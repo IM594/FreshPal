@@ -22,8 +22,8 @@
 
         <DatePicker
             android:id="@+id/datePicker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="286dp"
+            android:layout_height="346dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="-40dp"
             android:padding="16dp" />
@@ -113,4 +113,11 @@
         android:layout_height="wrap_content"
         android:onClick="logOut"
         android:text="Log out" />
+
+    <Button
+        android:id="@+id/profile_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="profileOnclick"
+        android:text="profile" />
 </LinearLayout>

@@ -30,6 +30,8 @@ public class User {
     @ColumnInfo(name = "defaultOpenExpireTime")
     private int defaultOpenExpireTime;
     // 其他字段
+    @ColumnInfo(name = "lastSyncTime")
+    private long lastSyncTime;
 
     // 构造函数、getter和setter方法
 
@@ -88,5 +90,12 @@ public class User {
 
     public void setDefaultOpenExpireTime(int defaultOpenExpireTime) {
         this.defaultOpenExpireTime = defaultOpenExpireTime;
+    }
+    public long getLastSyncTime() {
+        return lastSyncTime;
+    }
+
+    public void setLastSyncTime(long lastSyncTime) {
+        this.lastSyncTime = lastSyncTime;
     }
 }

@@ -97,7 +97,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_weight="1"
                 android:gravity="center_horizontal|center"
-                android:text="Setting"
+                android:text="Settings"
                 android:textSize="20dp" />
 
             <ImageView
@@ -115,33 +115,6 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?attr/colorPrimary" />
-        <RelativeLayout
-            android:id="@+id/reminder_page"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:clickable="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal|center"
-                android:text="Reminder Setting"
-                android:textSize="20dp" />
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="36dp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal|center"
-                app:srcCompat="@drawable/iconmonstr_angel_right_thin_240" />
-
-        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -152,10 +125,11 @@
             android:id="@+id/log_out_button"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:layout_gravity="center_horizontal|center"
+            android:layout_marginTop="50dp"
+            android:onClick="logOutforProfile"
             android:text="Log Out"
-            android:textSize="20dp"/>
+            android:textSize="20dp" />
 
 
     </LinearLayout>
