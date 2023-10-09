@@ -47,6 +47,9 @@ public class OCRImageProcessingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ocrimage_processing);
 
+        // set the status bar to light color (black text)
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
         MarshmallowPermission marshmallowPermission = new MarshmallowPermission(this);
 
         imageView = findViewById(R.id.imageView);

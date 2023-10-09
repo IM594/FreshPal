@@ -11,6 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -38,9 +39,12 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_page);
 
+        // set the status bar to light color (black text)
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
         db = FreshPalDB.getDatabase(getApplicationContext());
 
-        ImageView backwardImageView = findViewById(R.id.iv_backward);
+        ImageButton backwardImageView = findViewById(R.id.iv_backward);
         backwardImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,8 +65,8 @@ public class Settings extends AppCompatActivity {
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         timeZoneSpinner.setAdapter(adapter);
-        ImageButton imageButtonHome = findViewById(R.id.imageButton_home);
-        ImageButton imageButtonAdd = findViewById(R.id.imageButton_add);
+        LinearLayout imageButtonHome = findViewById(R.id.home_nav);
+        LinearLayout imageButtonAdd = findViewById(R.id.add_nav);
 
         imageButtonHome.setOnClickListener(new View.OnClickListener() {
             @Override

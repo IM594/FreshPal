@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -28,6 +29,13 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_profile);
+
+        // set the status bar to dark color (white text)
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE);
+
+        //设置status bar的颜色
+        getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+
         initViewParams();
 
         TextView userEmailTextView = findViewById(R.id.user_email);
@@ -47,8 +55,8 @@ public class Profile extends AppCompatActivity {
                 finish();
             }
         });
-        ImageButton profileAddButton = findViewById(R.id.profile_add);
-        ImageButton profileHomeButton = findViewById(R.id.profile_home);
+        LinearLayout profileAddButton = findViewById(R.id.add_nav);
+        LinearLayout profileHomeButton = findViewById(R.id.home_nav);
 
         profileAddButton.setOnClickListener(new View.OnClickListener() {
             @Override

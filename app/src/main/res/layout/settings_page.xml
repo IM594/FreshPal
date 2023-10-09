@@ -5,35 +5,46 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout
+    <!-- Top Bar -->
+    <LinearLayout
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_gravity="left"
-        android:background="?attr/colorPrimary"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/iv_backward"
             android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_marginStart="10dp"
-            android:ellipsize="none"
-            android:singleLine="true"
-            app:srcCompat="@drawable/iconmonstr_arrow_left_lined_240"
-            app:tint="#ffffff" />
+            android:layout_height="40dp"
+            android:layout_marginStart="0dp"
+            android:background="@drawable/rounded_button_background"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:srcCompat="@drawable/back"
+            app:tint="#000000" />
+
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal|center"
+            android:gravity="center"
             android:text="Settings"
-            android:textColor="#ffffff"
-            android:textSize="20dp" />
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    </FrameLayout>
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            app:tint="#000000" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -156,40 +167,96 @@
 
     </LinearLayout>
 
+    <!-- Bottom Navigation -->
+    <!-- 底部导航栏 -->
     <LinearLayout
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:gravity="bottom"
+        android:layout_height="70dp"
+        android:background="?attr/colorPrimary"
         android:orientation="horizontal"
-        android:background="?attr/colorPrimary">
+        android:layout_alignParentBottom="true">
 
-        <ImageButton
-            android:id="@+id/imageButton_home"
+        <!-- 主页按钮 -->
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="55dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="?attr/colorPrimary"
-            android:layout_gravity="center_vertical"
-            app:srcCompat="@drawable/list_white" />
+            android:gravity="center"
+            android:background="@color/cardview_light_background"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:id="@+id/home_nav">
 
-        <ImageButton
-            android:id="@+id/imageButton_add"
+            <ImageView
+                android:id="@+id/imageButton_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/home"
+                app:tint="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- 添加按钮 -->
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="55dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:background="?attr/colorPrimary"
-            app:srcCompat="@drawable/add_white" />
+            android:gravity="center"
+            android:background="@color/cardview_light_background"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:id="@+id/add_nav">
 
-        <ImageButton
-            android:id="@+id/imageButton_profile"
+            <ImageView
+                android:id="@+id/imageButton_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/add"
+                app:tint="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- 个人资料按钮 -->
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="55dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:background="@color/md_theme_light_surface"
-            app:srcCompat="@drawable/profile" />
+            android:gravity="center"
+            android:background="@color/cardview_light_background"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:id="@+id/profile_nav">
 
+            <ImageView
+                android:id="@+id/imageButton_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/profile"
+                app:tint="?attr/colorPrimary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="12sp" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

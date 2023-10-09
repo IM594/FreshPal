@@ -5,9 +5,9 @@
         <item name="backgroundColor">@color/md_theme_light_onPrimary</item>
 
         <item name="android:statusBarColor">@color/md_theme_light_onPrimary</item>
-<!--        <item name="android:navigationBarColor">@color/md_theme_light_onPrimary</item>-->
-<!--        <item name="colorPrimary">@color/md_theme_light_onPrimary</item>-->
-<!--        <item name="buttonStyle">@style/Widget.Material3.Button</item>-->
+        <item name="android:navigationBarColor">@color/md_theme_light_onPrimary</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="buttonStyle">@style/Widget.Material3.Button</item>
 
     </style>
 

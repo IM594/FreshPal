@@ -44,6 +44,9 @@ public class ImageLabelingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_labeling);
 
+        // set the status bar to light color (black text)
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
         imageView = findViewById(R.id.imageView);
         resultTextView = findViewById(R.id.resultTextView);
         takePhotoButton = findViewById(R.id.takePhotoButton);

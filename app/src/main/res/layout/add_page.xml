@@ -10,20 +10,20 @@
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="10dp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/iv_backward"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="0dp"
-        app:srcCompat="@drawable/back"
-        android:background="@drawable/rounded_button_background"
+            android:background="@drawable/rounded_button_background"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
+            app:srcCompat="@drawable/back"
             app:tint="#000000" />
 
 
@@ -33,11 +33,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Product Detail"
+            android:text="Add Product"
             android:textColor="#000000"
             android:textSize="20sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <ImageView
             android:layout_width="40dp"
@@ -51,8 +50,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/top_bar"
-        android:layout_above="@id/bottom_navigation">
+        android:layout_above="@id/bottom_navigation"
+        android:layout_below="@id/top_bar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,8 +73,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:inputType="text"
                 android:hint="Enter the product name"
+                android:inputType="text"
                 android:textSize="16sp" />
 
             <!-- Category -->
@@ -83,24 +82,24 @@
                 android:id="@+id/Category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Category"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="4dp">
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/category_input"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="text"
                     android:hint="Enter the product category"
+                    android:inputType="text"
                     android:textSize="16sp" />
 
                 <ImageButton
@@ -116,24 +115,32 @@
                 android:id="@+id/expired_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Best Before"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="If you do not enter it, it will be automatically calculated based on the date in the settings."
+                android:textColor="@color/greySecondary" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="4dp">
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
 
                 <EditText
                     android:id="@+id/expired_date_input"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="text"
                     android:hint="dd/mm/yyyy"
+                    android:inputType="text"
                     android:textSize="16sp" />
 
                 <ImageButton
@@ -158,17 +165,17 @@
                 android:id="@+id/store_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Store Location"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/store_location_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
                 android:hint="Enter the store location"
+                android:inputType="text"
                 android:textSize="16sp" />
 
             <!-- Storage Condition -->
@@ -176,10 +183,10 @@
                 android:id="@+id/storage_condition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Storage Condition"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/storage_condition_spinner"
@@ -191,17 +198,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/food_opened_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Is the food opened?"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_weight="1" /> <!-- 设置权重为 1，使其占据可用空间的一部分 -->
+                    android:textStyle="bold" /> <!-- 设置权重为 1，使其占据可用空间的一部分 -->
 
                 <CheckBox
                     android:id="@+id/check_box_opened"
@@ -209,7 +216,6 @@
                     android:layout_height="wrap_content"
                     android:checked="false" /> <!-- 默认未选中表示已开封，如果已开封则设置为 true -->
             </LinearLayout>
-
 
 
             <!-- Save Button -->
@@ -231,20 +237,21 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
         android:background="?attr/colorPrimary"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
+        android:orientation="horizontal">
 
         <!-- 主页按钮 -->
         <LinearLayout
+            android:id="@+id/home_nav"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@color/cardview_light_background"
-            android:orientation="vertical"
             android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground">
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imageButton_home"
@@ -266,11 +273,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@color/cardview_light_background"
-            android:orientation="vertical"
             android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground">
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imageButton_add"
@@ -289,14 +296,15 @@
 
         <!-- 个人资料按钮 -->
         <LinearLayout
+            android:id="@+id/profile_nav"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@color/cardview_light_background"
-            android:orientation="vertical"
             android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground">
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imageButton_profile"
