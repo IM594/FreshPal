@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -38,6 +39,8 @@ public class AddFood extends AppCompatActivity {
     CheckBox foodOpenedStatus;
     Button saveButton;
     ImageButton labelImageButton, dateCameraButton, calendarButton,backButton;
+    LinearLayout homeNav,profileNav;
+
 
     private static final int REQUEST_IMAGE_LABELING = 1;
     private static final int REQUEST_DATE_IMAGE_CAPTURE = 2;
@@ -69,9 +72,30 @@ public class AddFood extends AppCompatActivity {
         calendarButton = findViewById(R.id.imageButton_calendar);
         saveButton = findViewById(R.id.save_button);
 
+        homeNav = findViewById(R.id.home_nav);
+        profileNav = findViewById(R.id.profile_nav);
+
         // 初始化 Room 数据库和 FoodDao
         freshPalDB = FreshPalDB.getDatabase(getApplicationContext());
         foodDao = freshPalDB.foodDao();
+
+        // 单击homeNav，跳转到MainActivity
+        homeNav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddFood.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 单击profileNav，跳转到ProfileActivity
+        profileNav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddFood.this, Profile.class);
+                startActivity(intent);
+            }
+        });
 
         // 单击返回，返回上一页
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -120,7 +144,7 @@ public class AddFood extends AppCompatActivity {
 //                Toast.makeText(AddFood.this, "You click the add button", Toast.LENGTH_SHORT).show();
 
                 // 如果有空的输入框，提示用户
-                if (productNameInput.getText().toString().isEmpty() || categoryInput.getText().toString().isEmpty() || expiredDateInput.getText().toString().isEmpty() || storeLocationInput.getText().toString().isEmpty()) {
+                if (productNameInput.getText().toString().isEmpty() || categoryInput.getText().toString().isEmpty() ||  storeLocationInput.getText().toString().isEmpty()) {
                     Toast.makeText(AddFood.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -132,6 +156,8 @@ public class AddFood extends AppCompatActivity {
                     String storeLocation = storeLocationInput.getText().toString().trim();
                     String storageCondition = storageConditionSpinner.getSelectedItem().toString();
                     Boolean isOpened = foodOpenedStatus.isChecked();
+
+                    // TODO: 9/10/2023  如果expireDate是空，则根据Settings里的defaultExpireDate来设置。目前settings还没有defaultExpireDate
 
 
                     // 检查是否有输入为空，如果有则提示用户
@@ -261,7 +287,7 @@ public class AddFood extends AppCompatActivity {
             // 转换为UNIX时间戳（毫秒级别）
             long timestamp = expiredDateObj.getTime();
 
-            // bestBefore = expiredDate的timestam，直接返回
+            // bestBefore = expiredDate的timestamp，直接返回
             return timestamp;
         } catch (ParseException e) {
             // 处理日期解析异常

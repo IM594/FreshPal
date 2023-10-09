@@ -10,7 +10,7 @@
         android:id="@+id/view_background"
         android:layout_width="wrap_content"
         android:layout_height="300dp"
-        android:background="?attr/colorPrimary" />
+        android:background="#62509D" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/app_avatar"
@@ -134,41 +134,96 @@
 
     </LinearLayout>
 
+    <!-- Bottom Navigation -->
+    <!-- 底部导航栏 -->
     <LinearLayout
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:gravity="bottom"
-        android:orientation="horizontal"
+        android:layout_height="70dp"
         android:background="?attr/colorPrimary"
+        android:orientation="horizontal"
         android:layout_alignParentBottom="true">
 
-        <ImageButton
-            android:id="@+id/profile_home"
+        <!-- 主页按钮 -->
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="55dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:background="?attr/colorPrimary"
-            app:srcCompat="@drawable/list"
-            app:tint="#ffffff"/>
+            android:gravity="center"
+            android:background="@color/cardview_light_background"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:id="@+id/home_nav">
 
-        <ImageButton
-            android:id="@+id/profile_add"
-            android:layout_width="0dp"
-            android:layout_height="55dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:background="?attr/colorPrimary"
-            app:srcCompat="@drawable/add_white" />
+            <ImageView
+                android:id="@+id/imageButton_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/home"
+                app:tint="#000000" />
 
-        <ImageButton
-            android:id="@+id/profile_profile"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- 添加按钮 -->
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="55dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:background="@color/md_theme_light_surface"
-            app:srcCompat="@drawable/profile" />
+            android:gravity="center"
+            android:background="@color/cardview_light_background"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:id="@+id/add_nav">
+
+            <ImageView
+                android:id="@+id/imageButton_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/add"
+                app:tint="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- 个人资料按钮 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@color/cardview_light_background"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:id="@+id/profile_nav">
+
+            <ImageView
+                android:id="@+id/imageButton_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/profile"
+                app:tint="?attr/colorPrimary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="12sp" />
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

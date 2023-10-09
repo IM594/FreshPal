@@ -40,6 +40,10 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        // set the status bar to light color (black text)
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
         mFullName = findViewById(R.id.fullName);
         mEmail = findViewById(R.id.emailforsignup);
         mPasssword = findViewById(R.id.passwordForSignUp);
