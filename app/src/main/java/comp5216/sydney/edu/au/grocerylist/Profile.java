@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,24 +31,26 @@ public class Profile extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_profile);
 
-        // set the status bar to dark color (white text)
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE);
+//        // set the status bar to dark color (white text)
+//        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE);
+//
+//        //设置status bar的颜色
+//        getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
 
-        //设置status bar的颜色
-        getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         initViewParams();
 
         TextView userEmailTextView = findViewById(R.id.user_email);
         userEmailTextView.setText(email);
-        RelativeLayout changePasswordLayout = findViewById(R.id.change_password);
+        CardView changePasswordLayout = findViewById(R.id.change_password_card);
         changePasswordLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showPasswordResetDialog();
             }
         });
-        RelativeLayout SettingsLayout = findViewById(R.id.setting);
+        CardView SettingsLayout = findViewById(R.id.settings_card);
         SettingsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

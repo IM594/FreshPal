@@ -6,36 +6,48 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout
+
+    <!-- Top Bar -->
+    <LinearLayout
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_gravity="left"
-        android:layout_marginStart="0dp"
-        android:background="?attr/colorPrimary"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/iv_backward"
             android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_marginStart="10dp"
-            android:ellipsize="none"
-            android:singleLine="true"
-            app:srcCompat="@drawable/iconmonstr_arrow_left_lined_240"
-            app:tint="#ffffff" />
+            android:layout_height="40dp"
+            android:layout_marginStart="0dp"
+            android:background="@drawable/rounded_button_background"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:srcCompat="@drawable/back"
+            app:tint="#000000" />
+
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal|center"
-            android:text="Reminder"
-            android:textColor="#ffffff"
-            android:textSize="20dp" />
+            android:gravity="center"
+            android:text="Add Product"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    </FrameLayout>
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            app:tint="#000000" />
+
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/textView1"
@@ -44,7 +56,7 @@
         android:layout_marginStart="85dp"
         android:layout_marginTop="112dp"
         android:textSize="19dp"
-        android:text="The application will alert"
+        android:text="The application will alert you"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textStyle="bold"/>
@@ -101,7 +113,7 @@
         android:id="@+id/button"
         android:layout_width="105dp"
         android:layout_height="36dp"
-        android:layout_marginStart="230dp"
+        android:layout_gravity="center_horizontal"
         android:text="SAVE" />
 
 

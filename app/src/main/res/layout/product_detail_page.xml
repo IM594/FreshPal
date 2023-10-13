@@ -3,93 +3,70 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="0dp">
 
-    <!-- Bottom Navigation -->
+
+    <!-- Top Bar -->
     <LinearLayout
-        android:id="@+id/bottom_navigation"
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="?attr/colorPrimary"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageButton_home"
-            android:layout_width="0dp"
-            android:layout_height="55dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:background="@color/md_theme_light_surface"
-            app:srcCompat="@drawable/list" />
+            android:id="@+id/iv_backward"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="0dp"
+            android:background="@drawable/rounded_button_background"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:srcCompat="@drawable/back"
+            app:tint="#000000" />
 
-        <ImageButton
-            android:id="@+id/imageButton_add"
-            android:layout_width="0dp"
-            android:layout_height="55dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:background="?attr/colorPrimary"
-            app:srcCompat="@drawable/add_white" />
 
-        <ImageButton
-            android:id="@+id/imageButton_profile"
+        <TextView
+            android:id="@+id/tv_title"
             android:layout_width="0dp"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:background="?attr/colorPrimary"
-            app:srcCompat="@drawable/profile_white" />
+            android:gravity="center"
+            android:text="Add Product"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            app:tint="#000000" />
 
     </LinearLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottom_navigation">
+        android:layout_above="@id/bottom_navigation"
+        android:padding="16dp"
+        android:layout_below="@+id/top_bar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:layout_gravity="left"
-                android:layout_marginStart="0dp"
-                android:background="?attr/colorPrimary"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/iv_backward"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left"
-                    android:layout_marginStart="10dp"
-                    android:ellipsize="none"
-                    android:singleLine="true"
-                    app:srcCompat="@drawable/iconmonstr_arrow_left_lined_240"
-                    app:tint="#ffffff" />
-
-                <TextView
-                    android:id="@+id/tv_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal|center"
-                    android:text="Product detail"
-                    android:textColor="#ffffff"
-                    android:textSize="20dp" />
-
-            </LinearLayout>
 
             <!-- Product Name -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/product_name"
@@ -105,17 +82,16 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="text"
-                    android:text="Product name from database"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray" />
+                    android:hint="Product name from database"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <!-- Category -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/Category"
@@ -137,9 +113,8 @@
                         android:layout_weight="1"
                         android:ems="10"
                         android:inputType="text"
-                        android:text="Product category from database"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/darker_gray" />
+                        android:hint="Product category from database"
+                        android:textSize="14sp" />
 
 
                 </LinearLayout>
@@ -150,8 +125,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/expired_date"
@@ -173,9 +148,8 @@
                         android:layout_weight="1"
                         android:ems="10"
                         android:inputType="text"
-                        android:text="Expired date from database"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/darker_gray" />
+                        android:hint="Expired date from database"
+                        android:textSize="14sp" />
 
 
                 </LinearLayout>
@@ -186,8 +160,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/store_location"
@@ -203,17 +177,16 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="text"
-                    android:text="Store location from database"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray" />
+                    android:hint="Store location from database"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <!-- Storage Condition -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/storage_condition"
@@ -229,34 +202,33 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="text"
-                    android:text="Store condition form database"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray" />
+                    android:hint="Store condition form database"
+                    android:textSize="14sp" />
             </LinearLayout>
 
-            <!-- Food Sealed Status -->
+            <!-- Food Opened Status -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/food_opened_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Is the food sealed?"
+                    android:text="Is the food opened?"
                     android:textSize="18sp"
                     android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/food_opened_status_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="text"
-                    android:text="Food sealed data from database"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray" />
+                    android:hint="Food opend data from database"
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
@@ -272,5 +244,96 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <!-- Bottom Navigation -->
+    <!-- 底部导航栏 -->
+    <LinearLayout
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:background="?attr/colorPrimary"
+        android:orientation="horizontal">
+
+        <!-- 主页按钮 -->
+        <LinearLayout
+            android:id="@+id/home_nav"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/cardview_light_background"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageButton_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/home"
+                app:tint="?attr/colorPrimary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- 添加按钮 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/cardview_light_background"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageButton_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/add"
+                app:tint="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- 个人资料按钮 -->
+        <LinearLayout
+            android:id="@+id/profile_nav"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/cardview_light_background"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageButton_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/profile"
+                app:tint="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

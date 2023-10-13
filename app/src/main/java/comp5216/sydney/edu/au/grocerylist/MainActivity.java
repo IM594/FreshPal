@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     /* for test reminder page*/
     Button re;
     Button addFoodButton;
+    Button mainButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         datePicker = findViewById(R.id.datePicker);
         addFoodButton = findViewById(R.id.addFoodButton);
+        mainButton = findViewById(R.id.main_btn);
 
         //新的 ---
 
@@ -125,6 +127,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,Profile.class));
             }
         });
+
+        // test main page
+//        mainButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(MainActivity.this,Main.class));
+//            }
+//        });
     }
 
     public void onAddItemClick(View view) {
