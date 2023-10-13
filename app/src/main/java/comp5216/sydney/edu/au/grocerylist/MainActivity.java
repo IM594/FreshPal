@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private FreshPalDB freshPalDB;
     private UserDao userDao;
     private FoodDao foodDao;
+    FirebaseFirestore dbFire = FirebaseFirestore.getInstance();//
 
 //    FreshPalDB freshPalDB = FreshPalDB.getDatabase(getApplicationContext());
 //    UserDao userDao = freshPalDB.userDao();
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     /* for test reminder page*/
     Button re;
     Button addFoodButton;
+    Button mainButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         datePicker = findViewById(R.id.datePicker);
         addFoodButton = findViewById(R.id.addFoodButton);
+        mainButton = findViewById(R.id.main_btn);
 
         //新的 ---
 
@@ -123,6 +127,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,Profile.class));
             }
         });
+
+        // test main page
+//        mainButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(MainActivity.this,Main.class));
+//            }
+//        });
     }
 
     public void onAddItemClick(View view) {
