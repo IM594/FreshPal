@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private FreshPalDB freshPalDB;
     private UserDao userDao;
     private FoodDao foodDao;
+    FirebaseFirestore dbFire = FirebaseFirestore.getInstance();//
 
 //    FreshPalDB freshPalDB = FreshPalDB.getDatabase(getApplicationContext());
 //    UserDao userDao = freshPalDB.userDao();
