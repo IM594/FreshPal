@@ -17,7 +17,7 @@
     <string name="value_any_storage">All Storage Conditions</string>
     <string name="value_any_product">Any product</string>
     <string name="all_items">All Items</string>
-    
+
     <string-array name="storage_conditions">
         <item>Outdoor</item>
         <item>Refrigerator</item>

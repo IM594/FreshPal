@@ -34,6 +34,19 @@ android {
 }
 
 dependencies {
+    // Firestore
+    implementation 'com.google.firebase:firebase-firestore:24.2.2'
+    implementation platform('com.google.firebase:firebase-bom:32.2.2')
+    // Other Firebase/Play services deps
+    implementation 'com.google.firebase:firebase-auth:21.0.7'
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
+
+    // FirebaseUI (for authentication)
+    implementation 'com.firebaseui:firebase-ui-auth:8.0.1'
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-livedata:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1"
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'

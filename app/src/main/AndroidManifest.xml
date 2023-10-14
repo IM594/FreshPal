@@ -33,11 +33,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:targetApi="31">
-<!--        <activity-->
-<!--            android:name=".CloudVisionLabelingActivity"-->
-<!--            android:exported="false" />-->
-<!--        <activity android:name=".CloudOCRActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".FoodDetail"
+            android:exported="false" />
+        <activity
+            android:name=".MainPageViewModel"
+            android:exported="false" />
+        <activity
+            android:name=".MainPage"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- <activity -->
+        <!-- android:name=".CloudVisionLabelingActivity" -->
+        <!-- android:exported="false" /> -->
+        <!-- <activity android:name=".CloudOCRActivity" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".Settings"
             android:exported="false" />
