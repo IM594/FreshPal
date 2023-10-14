@@ -128,7 +128,10 @@ public class Login extends AppCompatActivity {
                     User newUser = new User();
                     newUser.setUserID(user.getUid());
                     newUser.setUsername(user.getDisplayName());
-                    newUser.setEmail(user.getEmail());
+//                    newUser.setEmail(user.getEmail());
+                    // Encrypt the user's email before storing it in the database
+                    String encryptedEmail = EmailEncryptor.encryptEmail(user.getEmail(), Login.this);
+                    newUser.setEmail(encryptedEmail);
                     newUser.setReminderEnabled(false);
                     newUser.setDefaultReminderTime(0);
                     newUser.setDefaultOpenExpireTime(0);
