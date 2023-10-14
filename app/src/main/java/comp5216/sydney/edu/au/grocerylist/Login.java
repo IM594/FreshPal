@@ -136,8 +136,9 @@ public class Login extends AppCompatActivity {
                 }
             }
         }).start();
-
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        Intent mainIntent = new Intent(getApplicationContext(), MainPage.class);
+        mainIntent.putExtra("userID", user.getUid());
+        startActivity(mainIntent);
     }
 
     // 检查本地数据库中是否已存在具有相同用户ID的用户信息

@@ -5,11 +5,11 @@ import android.text.TextUtils;
 
 public class Filters {
 
-    private String category = null;
-    private String storage = null;
-    private String from = null;
-    private String to = null;
-    private String productName = null;
+    private String category = "ALL";
+    private String storage = "ALL";
+    private long from = -30000;
+    private long to = 30000;
+    private String productName = "ALL";
 
     public Filters() {}
 
@@ -17,25 +17,6 @@ public class Filters {
         Filters filters = new Filters();
 
         return filters;
-    }
-
-    public boolean hasCategory() {
-        return !(TextUtils.isEmpty(category));
-    }
-
-    public boolean hasStorage() {
-        return !(TextUtils.isEmpty(storage));
-    }
-
-    public boolean hasFrom() {
-        return !(TextUtils.isEmpty(from));
-    }
-    public boolean hasTo() {
-        return !(TextUtils.isEmpty(to));
-    }
-
-    public boolean hasProductName() {
-        return !(TextUtils.isEmpty(productName));
     }
 
     public String getCategory() {
@@ -54,18 +35,18 @@ public class Filters {
         this.storage = storage;
     }
 
-    public String getFrom() {
+    public long getFrom() {
         return from;
     }
 
-    public void setFrom(String from) {
+    public void setFrom(long from) {
         this.from = from;
     }
-    public String getTo() {
+    public long getTo() {
         return to;
     }
 
-    public void setTo(String to) {
+    public void setTo(long to) {
         this.to = to;
     }
 
@@ -80,7 +61,7 @@ public class Filters {
     public String getSearchDescription(Context context) {
         StringBuilder desc = new StringBuilder();
 
-        if (category == null && storage == null && from == null && to == null && productName == null) {
+        if (category == null && storage == null && from == -30000 && to == 30000 && productName == null) {
             desc.append("<b>");
             desc.append(context.getString(R.string.all_items));
             desc.append("</b>");
@@ -102,18 +83,18 @@ public class Filters {
             desc.append("</b>");
         }
 
-        if (from != null && to != null) {
+        if (from != -30000 && to != 30000) {
             desc.append(" expired days ");
         }
 
-        if (from != null) {
+        if (from != -30000) {
             desc.append(" from ");
             desc.append("<b>");
             desc.append(from);
             desc.append("</b>");
         }
 
-        if (to != null) {
+        if (to != 30000) {
             desc.append(" to ");
             desc.append("<b>");
             desc.append(to);
