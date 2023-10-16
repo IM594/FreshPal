@@ -18,4 +18,12 @@ public interface UserDao {
     @Update
     void updateUser(User user);
     // 添加其他用户相关的查询和操作方法
+
+    //getUserData
+    @Query("SELECT * FROM user_table WHERE userID = :userID")
+    User getUserData(String userID);
+
+    //set last sync time
+    @Query("UPDATE user_table SET lastSyncTime = :lastSyncTime WHERE userID = :userID")
+    void setLastSyncTime(String userID, long lastSyncTime);
 }

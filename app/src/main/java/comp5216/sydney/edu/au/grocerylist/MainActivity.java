@@ -17,21 +17,29 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.WriteBatch;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 import comp5216.sydney.edu.au.grocerylist.data.dao.FoodDao;
 import comp5216.sydney.edu.au.grocerylist.data.dao.UserDao;
 import comp5216.sydney.edu.au.grocerylist.data.database.FreshPalDB;
+import comp5216.sydney.edu.au.grocerylist.data.entities.Food;
+import comp5216.sydney.edu.au.grocerylist.data.entities.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -89,6 +97,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, AddFood.class));
             }
         });
+
+        findViewById(R.id.syncbtn).setOnClickListener(this::onSyncClicked);
+
 
         //新的 ---
 
@@ -321,4 +332,140 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), Profile.class));
         finish();
     }
+
+
+
+    //---------------------同步（start）
+
+
+    // 点击同步按钮
+    private void onSyncClicked(View view) {
+        new Thread(() -> {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            String userId = FirebaseAuth.getInstance().getUid();
+
+            if (userId != null) {
+                // 1. 检查云端是否已经存在 userId 的数据
+                DocumentReference userSettingRef = db.collection(userId).document("user_setting");
+
+                userSettingRef.get()
+                        .addOnSuccessListener(documentSnapshot -> {
+                            if (documentSnapshot.exists()) {
+                                // 2. 如果文档存在，删除云端的 user_setting 和 food_information 文档
+                                db.collection(userId).document("user_setting").delete();
+                                db.collection(userId).document("food_information").delete();
+                            }
+
+                            // 3. 继续执行上传操作
+                            WriteBatch batch = db.batch();
+
+                            DocumentReference newUserSettingRef = db.collection(userId).document("user_setting");
+                            User localUser = getLocalUserData();
+                            Map<String, Object> userSettingData = new HashMap<>();
+                            userSettingData.put("username", localUser.getUsername());
+                            userSettingData.put("email", localUser.getEmail());
+                            userSettingData.put("reminderEnabled", localUser.isReminderEnabled());
+                            userSettingData.put("defaultReminderTime", localUser.getDefaultReminderTime());
+                            userSettingData.put("defaultOpenExpireTime", localUser.getDefaultOpenExpireTime());
+                            userSettingData.put("lastSyncTime", System.currentTimeMillis());
+                            batch.set(newUserSettingRef, userSettingData);
+
+                            DocumentReference newFoodInformationRef = db.collection(userId).document("food_information");
+                            List<Food> localFoods = getLocalFoodData();
+                            List<Map<String, Object>> foodDataList = new ArrayList<>();
+                            for (Food food : localFoods) {
+                                Map<String, Object> foodData = new HashMap<>();
+                                foodData.put("foodName", food.getFoodName());
+                                foodData.put("quantity", food.getQuantity());
+                                foodData.put("isOpened", food.isOpened());
+                                foodData.put("category", food.getCategory());
+                                foodData.put("addTime", food.getAddTime());
+                                foodData.put("productionDate", food.getProductionDate());
+                                foodData.put("expireTime", food.getExpireTime());
+                                foodData.put("bestBefore", food.getBestBefore());
+                                foodData.put("imageURL", food.getImageURL());
+                                foodData.put("storageCondition", food.getStorageCondition());
+                                foodData.put("storageLocation", food.getStorageLocation());
+                                foodDataList.add(foodData);
+                            }
+                            batch.set(newFoodInformationRef, Collections.singletonMap("food_collection", foodDataList));
+
+                            // 4. 提交批处理操作
+                            batch.commit()
+                                    .addOnSuccessListener(aVoid -> {
+                                        // 同步成功后，更新本地数据库的 lastSyncTime
+                                        updateLocalLastSyncTime(System.currentTimeMillis());
+
+                                        // 更新UI或显示消息
+                                        runOnUiThread(() -> {
+                                            Toast.makeText(MainActivity.this, "Sync completed.", Toast.LENGTH_SHORT).show();
+                                        });
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        // 处理同步失败
+                                        runOnUiThread(() -> {
+                                            Toast.makeText(MainActivity.this, "Sync failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        });
+                                    });
+                        })
+                        .addOnFailureListener(e -> {
+                            // 处理同步失败
+                            runOnUiThread(() -> {
+                                Toast.makeText(MainActivity.this, "Sync failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            });
+                        });
+            }
+        }).start();
+    }
+
+
+    // 获取本地数据库中的用户数据
+    private User getLocalUserData() {
+        User[] user = new User[1];
+        Thread thread = new Thread(() -> {
+            UserDao userDao = freshPalDB.userDao();
+            user[0] = userDao.getUserData(FirebaseAuth.getInstance().getUid());
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return user[0];
+    }
+
+
+    // 获取本地数据库中的食物数据
+    private List<Food> getLocalFoodData() {
+        List<Food> localFoods = new ArrayList<>();
+        Thread thread = new Thread(() -> {
+            FoodDao foodDao = freshPalDB.foodDao();
+            localFoods.addAll(foodDao.getAllFood());
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return localFoods;
+    }
+
+
+    // 更新本地数据库的 lastSyncTime
+    private void updateLocalLastSyncTime(long timestamp) {
+        // 更新本地数据库的 lastSyncTime 字段
+        new Thread(() -> {
+            UserDao userDao = freshPalDB.userDao();
+            userDao.setLastSyncTime(FirebaseAuth.getInstance().getUid(), timestamp);
+        }).start();
+    }
+
+
+
+
+
+    //---------------------同步（end）
+
 }
