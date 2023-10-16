@@ -29,40 +29,77 @@
             android:maxLines="1"
             android:focusable="false"/>
 
-        <ImageView
+        <!--<ImageView
             android:id="@+id/storage_image"
             android:layout_width="20dp"
             android:layout_height="20dp"
             app:layout_constraintStart_toEndOf="@+id/item_name"
             app:layout_constraintTop_toTopOf="@+id/item_name"
+            app:layout_constraintBottom_toBottomOf="@+id/item_name"
             android:layout_marginTop="2dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="10dp"
+        app:srcCompat="@drawable/sun"
+        android:focusable="false"/>-->
+
+        <ImageView
+            android:id="@+id/storage_image"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="120dp"
+            android:layout_marginEnd="10dp"
             app:srcCompat="@drawable/sun"
             android:focusable="false"/>
 
-        <TextView
-            android:id="@+id/expired_days"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@+id/item_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="26dp"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            tools:text="10"
-            android:focusable="false"/>
 
         <CheckBox
             android:id="@+id/switch_opened"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/storage_image"
-            android:layout_marginStart="10dp"
-            app:layout_constraintTop_toTopOf="parent"
+            android:clickable="false"
+            android:focusable="false"
             android:text="Opened"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.177"
+            app:layout_constraintStart_toEndOf="@+id/storage_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/expired_days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="26dp"
+            android:focusable="false"
+            android:shadowColor="#000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="10"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/item_name"
+            tools:text="10" />
+
+        <!--<CheckBox
+            android:id="@+id/switch_opened"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:clickable="false"
-            android:focusable="false"/>
+            android:focusable="false"
+            android:text="Opened"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/storage_image"
+            app:layout_constraintTop_toTopOf="parent" />-->
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
