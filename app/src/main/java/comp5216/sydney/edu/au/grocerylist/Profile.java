@@ -42,7 +42,11 @@ public class Profile extends AppCompatActivity {
         initViewParams();
 
         TextView userEmailTextView = findViewById(R.id.user_email);
+//        userEmailTextView.setText(email);
+        // Decrypt and set the email
+//        email = EmailEncryptor.decryptEmail(encryptedEmail, this);
         userEmailTextView.setText(email);
+        Toast.makeText(this, "email: " + email, Toast.LENGTH_SHORT).show();
         CardView changePasswordLayout = findViewById(R.id.change_password_card);
         changePasswordLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +87,7 @@ public class Profile extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         email = user.getEmail();
         fAuth = FirebaseAuth.getInstance();
+//        Toast.makeText(this, "encryptedEmail: " + encryptedEmail, Toast.LENGTH_SHORT).show();
     }
     private void showPasswordResetDialog() {
 

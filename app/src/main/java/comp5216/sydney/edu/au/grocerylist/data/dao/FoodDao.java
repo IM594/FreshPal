@@ -15,18 +15,23 @@ public interface FoodDao {
 
     @Insert
     void insert(Food food);
+
     @Update
     void update(Food food);
+
     @Delete
     void delete(Food food);
 
 
     @Query("SELECT * FROM food_table WHERE category = :category")
     List<Food> findByCategory(String category);
+
     @Query("SELECT * FROM food_table WHERE storageCondition = :storage")
     List<Food> findByStorage(String storage);
+
     @Query("SELECT * FROM food_table WHERE foodName = :name")
     List<Food> findByFoodName(String name);
+
     @Query("SELECT * FROM food_table WHERE bestBefore BETWEEN :startDate AND :endDate")
     List<Food> getFoodsBetweenDates(long startDate, long endDate);
 
@@ -44,11 +49,18 @@ public interface FoodDao {
 
     @Query("SELECT DISTINCT category FROM food_table WHERE userID = :userID")
     List<String> getDistinctCategories(String userID);
+
     @Query("SELECT DISTINCT foodName FROM food_table WHERE userID = :userID")
     List<String> getDistinctFoodName(String userID);
+
     @Query("SELECT DISTINCT storageCondition FROM food_table WHERE userID = :userID")
     List<String> getDistinctStorageCondition(String userID);
+
     // 添加其他食物相关的查询和操作方法
     @Query("SELECT * FROM food_table WHERE foodID = :foodID AND userID = :userID")
     Food getFoodsByFoodId(int foodID, String userID);
+
+    //get all food
+    @Query("SELECT * FROM food_table")
+    List<Food> getAllFood();
 }
