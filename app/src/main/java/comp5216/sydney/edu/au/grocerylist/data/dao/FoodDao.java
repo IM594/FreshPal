@@ -35,14 +35,16 @@ public interface FoodDao {
     @Query("SELECT * FROM food_table WHERE bestBefore BETWEEN :startDate AND :endDate")
     List<Food> getFoodsBetweenDates(long startDate, long endDate);
 
-    @Query("SELECT * FROM food_table WHERE userID = :userID")
+    @Query("SELECT * FROM food_table WHERE userID = :userID ORDER BY bestbefore ASC")
     List<Food> getFoodsByUserId(String userID);
 
     @Query("SELECT * FROM food_table WHERE (:foodName IS NULL OR foodName = :foodName) AND " +
-            "(expireTime BETWEEN :startTime AND :endTime) AND " +
+            "(bestBefore BETWEEN :bestBeforeStartTime AND :bestBoforeEndTime) AND " +
             "(:category IS NULL OR category = :category) AND " +
-            "(:storageCondition IS NULL OR storageCondition = :storageCondition)")
-    List<Food> filterFoods(String category, String storageCondition, Long startTime, Long endTime, String foodName);
+            "(:storageCondition IS NULL OR storageCondition = :storageCondition) AND " +
+            "(userID = :userID)ORDER BY bestbefore ASC")
+    List<Food> filterFoods(String category, String storageCondition,  Long bestBeforeStartTime, Long bestBoforeEndTime, String foodName, String userID);
+
 
 
     @Query("SELECT DISTINCT category FROM food_table WHERE userID = :userID")
