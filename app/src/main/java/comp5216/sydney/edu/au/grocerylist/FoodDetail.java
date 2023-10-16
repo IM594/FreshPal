@@ -31,6 +31,7 @@ public class FoodDetail extends AppCompatActivity {
     Intent intent;
     private String userID;
     private int defaultValue = 0;
+    private int defaultTime;
     private boolean defaultBooleanValue = false;
     private int foodID;
     private String foodName, category, storeLocation, storageCondition;
@@ -61,6 +62,7 @@ public class FoodDetail extends AppCompatActivity {
         intent = getIntent();
         userID = intent.getStringExtra("userID");
         Log.i(TAG, "userID " +userID);
+        defaultTime = intent.getIntExtra("defaultTime", defaultValue);
         foodID = intent.getIntExtra("foodID", defaultValue);
         foodName = intent.getStringExtra("foodName");
         category = intent.getStringExtra("category");
@@ -144,6 +146,13 @@ public class FoodDetail extends AppCompatActivity {
         bestBefore = bestBefore + (Long.parseLong(expiredDateEdit.getText().toString()) - currentExpireTime)*86400000;
         storeLocation = storeLocationEdit.getText().toString();
         storageCondition = storageConditionSpinner.getSelectedItem().toString();
+        if(foodStatus != foodStatusSwitch.isChecked() && foodStatus == false) {
+            // 获取当前时间的时间戳
+            Date currentDate = new Date();
+            // 转换为UNIX时间戳（毫秒级别）
+            long currentTimestamp = currentDate.getTime();
+            bestBefore = currentTimestamp + ((long) defaultTime)*86400000;
+        }
         foodStatus = foodStatusSwitch.isChecked();
         Log.i(TAG, foodName + category + bestBefore + storeLocation + storageCondition);
             executor.execute(new Runnable() {

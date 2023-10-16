@@ -60,13 +60,14 @@ public class MainPage extends AppCompatActivity implements
     private FilterDialogFragment mFilterDialog;
     private FreshPalDB mdb;
     private FoodDao mFoodDao;
-    //private UserDao mUserDao;
+    private UserDao mUserDao;
     private FoodAdapter foodadapter;
     private MainPageViewModel mViewModel;
     private List<String> categorySpinner;
     private List<String> StorageSpinner;
     private List<String> foodNameSpinner;
     private List<Food> foodsFromDB;
+    private int defaultOpenExpireTime;
 
 
     @Override
@@ -95,6 +96,7 @@ public class MainPage extends AppCompatActivity implements
         //初始化数据库相关
         mdb = FreshPalDB.getDatabase(this.getApplication().getApplicationContext());
         mFoodDao = mdb.foodDao();
+        mUserDao = mdb.userDao();
         //mUserDao = mdb.userDao();
         //从数据库中读取food数据并显示mlistview
         readFoodFromDatabase();
@@ -126,6 +128,7 @@ public class MainPage extends AppCompatActivity implements
 
                 if (intent != null) {
                     // (可选) 将food对象或其属性作为额外数据放入intent中
+                    intent.putExtra("defaultTime", defaultOpenExpireTime);
                     intent.putExtra("userID", userID);
                     intent.putExtra("foodID", clickedFood.getFoodID());
                     intent.putExtra("foodName", clickedFood.getFoodName());
@@ -149,6 +152,7 @@ public class MainPage extends AppCompatActivity implements
                 public void run() {
                     //从数据库中获取food数据
                     foodsFromDB = mFoodDao.getFoodsByUserId(userID);
+                    defaultOpenExpireTime = mUserDao.getDefaultOpenExpireTime(userID);
                     Log.i(TAG, "$$$$$$$$$$$$$$ "+foodsFromDB.size());
                     foodNameSpinner = mFoodDao.getDistinctFoodName(userID);
                     categorySpinner = mFoodDao.getDistinctCategories(userID);
