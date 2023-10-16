@@ -69,6 +69,13 @@ public class MainPage extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
+
+        //        // set the status bar to dark color (white text)
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE);
+//
+//        //设置status bar的颜色
+        getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+
         productList = findViewById(R.id.product_list_title);
         syncStatus = findViewById(R.id.sync_status);
         userID = "wz7j5k64S1aDg5zlgAxMQH7APBF2";
