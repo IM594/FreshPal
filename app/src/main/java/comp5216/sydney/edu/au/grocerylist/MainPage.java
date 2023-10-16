@@ -103,8 +103,8 @@ public class MainPage extends AppCompatActivity implements
         findViewById(R.id.button_clear_filter).setOnClickListener(this::onClearFilterClickedClick);
         findViewById(R.id.sync).setOnClickListener(this::onSyncClicked);
 //        findViewById(R.id.imageButton_home).setOnClickListener(this::onHomeClick);
-        findViewById(R.id.imageButton_add).setOnClickListener(this::onAddClick);
-        findViewById(R.id.imageButton_profile).setOnClickListener(this::onProfileClick);
+        findViewById(R.id.add_nav).setOnClickListener(this::onAddClick);
+        findViewById(R.id.profile_nav).setOnClickListener(this::onProfileClick);
         // View model
         mViewModel = new ViewModelProvider(this).get(MainPageViewModel.class);
         // Enable Firestore logging

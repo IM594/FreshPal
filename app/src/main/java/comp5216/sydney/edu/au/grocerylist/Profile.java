@@ -78,7 +78,7 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Navigate to MainActivity
-                Intent intent = new Intent(Profile.this, MainActivity.class);
+                Intent intent = new Intent(Profile.this, MainPage.class);
                 startActivity(intent);
             }
         });

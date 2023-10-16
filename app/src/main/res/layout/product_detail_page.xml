@@ -16,16 +16,16 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/iv_backward"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="0dp"
-            android:background="@drawable/rounded_button_background"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:srcCompat="@drawable/back"
-            app:tint="#000000" />
+                <ImageButton
+                    android:id="@+id/iv_backward"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="0dp"
+                    android:background="@drawable/rounded_button_background"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:srcCompat="@drawable/back"
+                    app:tint="#000000" />
 
 
         <TextView
@@ -34,16 +34,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Add Product"
+            android:text="Edit Product"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:padding="10dp"
-            app:tint="#000000" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="10dp"
+                    app:tint="#000000" />
 
     </LinearLayout>
 

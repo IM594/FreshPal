@@ -51,6 +51,10 @@ public class FoodDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_detail_page);
+
+        // set the status bar to light color (black text)
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
         //初始化数据库相关
         mdb = FreshPalDB.getDatabase(this.getApplication().getApplicationContext());
         mFoodDao = mdb.foodDao();
