@@ -15,6 +15,9 @@ public interface UserDao {
     @Query("SELECT * FROM user_table WHERE userID = :userID")
     User getUserById(String userID);
 
+    @Query("SELECT defaultOpenExpireTime FROM user_table WHERE userID = :userID")
+    int getDefaultOpenExpireTime(String userID);
+
     @Update
     void updateUser(User user);
     // 添加其他用户相关的查询和操作方法
