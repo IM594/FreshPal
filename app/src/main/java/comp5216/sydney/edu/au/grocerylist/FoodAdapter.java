@@ -2,6 +2,7 @@ package comp5216.sydney.edu.au.grocerylist;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 import comp5216.sydney.edu.au.grocerylist.data.entities.Food;
@@ -47,6 +50,7 @@ public class FoodAdapter extends BaseAdapter {
     @Override
     //填充每个item的内容
     public View getView(int position, View convertView, ViewGroup viewGroup) {
+        Log.i("FoodList", "***********"+foodList.get(position));
         View view = null;
         ViewHolder viewHolder = null;
         if (convertView == null) {
@@ -67,20 +71,32 @@ public class FoodAdapter extends BaseAdapter {
             viewHolder = (ViewHolder)view.getTag();
         }
         //给item中各控件赋值
-        int expireTime = foodList.get(position).getExpireTime();
+        // 获取当前时间的时间戳
+        Date currentDate = new Date();
+        // 转换为UNIX时间戳（毫秒级别）
+        long currentTimestamp = currentDate.getTime();
+        long bestBefore = foodList.get(position).getBestBefore();
+        long expireTime = (bestBefore - currentTimestamp)/86400000;
         viewHolder.foodName.setText(foodList.get(position).getFoodName());
         viewHolder.expiredDays.setText(String.valueOf(expireTime));
-        viewHolder.storageImage.setImageResource(R.drawable.sun);
+        if (foodList.get(position).getStorageCondition().equals("Outdoor")) {
+            viewHolder.storageImage.setImageResource(R.drawable.sun);
+        } else if(foodList.get(position).getStorageCondition().equals("Freezer")){
+            viewHolder.storageImage.setImageResource(R.drawable.ice_mountain);
+        } else {
+            viewHolder.storageImage.setImageResource(R.drawable.snow);
+        }
         viewHolder.switchOpened.setChecked(foodList.get(position).isOpened());
         if (expireTime >= 0 && expireTime <= 1) {
             viewHolder.expiredDays.setTextColor(Color.RED);
         } else if (expireTime > 1 && expireTime <= 3) {
-            viewHolder.expiredDays.setTextColor(Color.YELLOW);
+            viewHolder.expiredDays.setTextColor(Color.parseColor("#f7e405"));
         } else if (expireTime > 3) {
             viewHolder.expiredDays.setTextColor(Color.GREEN);
         } else if (expireTime < 0) {
             viewHolder.expiredDays.setTextColor(Color.BLACK);
         }
+
 
         return view;
     }

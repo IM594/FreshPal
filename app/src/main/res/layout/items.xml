@@ -5,39 +5,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_marginBottom="10dp"
     style="@style/Widget.Material3.CardView.Outlined"
     app:cardCornerRadius="8dp">
 
-    <LinearLayout
-        android:id="@+id/item"
+    <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/item"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="?attr/selectableItemBackground"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            tools:text="Banana"
+            android:textSize="16sp"
+            android:maxLines="1"
+            android:focusable="false"/>
+
 
         <ImageView
             android:id="@+id/storage_image"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_weight="0.3"
-            android:layout_gravity="left|center_vertical"
-            tools:src="@drawable/sun"
-            android:focusable="false"/>
-
-        <TextView
-            android:id="@+id/item_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="8"
-            android:layout_marginLeft="10dp"
-            android:gravity="start|center_vertical"
-            tools:text="Banana"
-            android:textSize="16sp"
-            android:maxLines="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="120dp"
+            android:layout_marginEnd="10dp"
+            app:srcCompat="@drawable/sun"
             android:focusable="false"/>
 
 
@@ -45,23 +47,35 @@
             android:id="@+id/switch_opened"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Opened"
-            android:textSize="12sp"
             android:clickable="false"
             android:focusable="false"
-            android:gravity="start|center_vertical"/>
+            android:text="Opened"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.177"
+            app:layout_constraintStart_toEndOf="@+id/storage_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/expired_days"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end|center_vertical"
-            android:textStyle="bold"
+            android:layout_marginEnd="26dp"
+            android:focusable="false"
+            android:shadowColor="#000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="10"
             android:textSize="20sp"
-            tools:text="10"
-            android:focusable="false"/>
-    </LinearLayout>
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/item_name"
+            tools:text="10" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
