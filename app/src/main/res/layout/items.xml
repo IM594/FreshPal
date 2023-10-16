@@ -29,18 +29,6 @@
             android:maxLines="1"
             android:focusable="false"/>
 
-        <!--<ImageView
-            android:id="@+id/storage_image"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            app:layout_constraintStart_toEndOf="@+id/item_name"
-            app:layout_constraintTop_toTopOf="@+id/item_name"
-            app:layout_constraintBottom_toBottomOf="@+id/item_name"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="10dp"
-        app:srcCompat="@drawable/sun"
-        android:focusable="false"/>-->
 
         <ImageView
             android:id="@+id/storage_image"
@@ -86,19 +74,6 @@
             app:layout_constraintTop_toTopOf="@+id/item_name"
             tools:text="10" />
 
-        <!--<CheckBox
-            android:id="@+id/switch_opened"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:clickable="false"
-            android:focusable="false"
-            android:text="Opened"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/storage_image"
-            app:layout_constraintTop_toTopOf="parent" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
