@@ -1,6 +1,7 @@
 package comp5216.sydney.edu.au.grocerylist;
 
 // 导入所需的包
+
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,8 +39,8 @@ public class AddFood extends AppCompatActivity {
     Spinner storageConditionSpinner;
     CheckBox foodOpenedStatus;
     Button saveButton;
-    ImageButton labelImageButton, dateCameraButton, calendarButton,backButton;
-    LinearLayout homeNav,profileNav;
+    ImageButton labelImageButton, dateCameraButton, calendarButton;
+    LinearLayout homeNav, profileNav;
 
 
     private static final int REQUEST_IMAGE_LABELING = 1;
@@ -48,6 +49,9 @@ public class AddFood extends AppCompatActivity {
 
     private FreshPalDB freshPalDB;
     private FoodDao foodDao;
+
+    private String userID;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +70,6 @@ public class AddFood extends AppCompatActivity {
         storageConditionSpinner = findViewById(R.id.storage_condition_spinner);
         foodOpenedStatus = findViewById(R.id.check_box_opened);
 
-        backButton = findViewById(R.id.iv_backward);
         labelImageButton = findViewById(R.id.imageButton_category_camera);
         dateCameraButton = findViewById(R.id.imageButton_expired_date_camera);
         calendarButton = findViewById(R.id.imageButton_calendar);
@@ -78,6 +81,13 @@ public class AddFood extends AppCompatActivity {
         // 初始化 Room 数据库和 FoodDao
         freshPalDB = FreshPalDB.getDatabase(getApplicationContext());
         foodDao = freshPalDB.foodDao();
+
+        // 获取user信息
+        user = getUserData();
+
+        // 获取userID
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        userID = currentUser.getUid();
 
         // 单击homeNav，跳转到MainActivity
         homeNav.setOnClickListener(new View.OnClickListener() {
@@ -97,13 +107,13 @@ public class AddFood extends AppCompatActivity {
             }
         });
 
-        // 单击返回，返回上一页
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+//        // 单击返回，返回上一页
+//        backButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                finish();
+//            }
+//        });
 
         // Category 拍照识别按钮
         labelImageButton.setOnClickListener(new View.OnClickListener() {
@@ -144,63 +154,62 @@ public class AddFood extends AppCompatActivity {
 //                Toast.makeText(AddFood.this, "You click the add button", Toast.LENGTH_SHORT).show();
 
                 // 如果有空的输入框，提示用户
-                if (productNameInput.getText().toString().isEmpty() || categoryInput.getText().toString().isEmpty() ||  storeLocationInput.getText().toString().isEmpty()) {
+                if (productNameInput.getText().toString().isEmpty() || categoryInput.getText().toString().isEmpty() || storeLocationInput.getText().toString().isEmpty()) {
                     Toast.makeText(AddFood.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
 
-                    String productName = productNameInput.getText().toString().trim();
-                    String category = categoryInput.getText().toString().trim();
-                    String expiredDate = expiredDateInput.getText().toString().trim();
-                    String storeLocation = storeLocationInput.getText().toString().trim();
-                    String storageCondition = storageConditionSpinner.getSelectedItem().toString();
-                    Boolean isOpened = foodOpenedStatus.isChecked();
+                String productName = productNameInput.getText().toString().trim();
+                String category = categoryInput.getText().toString().trim();
+                String expiredDate = expiredDateInput.getText().toString().trim();
+                String storeLocation = storeLocationInput.getText().toString().trim();
+                String storageCondition = storageConditionSpinner.getSelectedItem().toString();
+                Boolean isOpened = foodOpenedStatus.isChecked();
 
-                    // TODO: 9/10/2023  如果expireDate是空，则根据Settings里的defaultExpireDate来设置。目前settings还没有defaultExpireDate
+                // TODO: 9/10/2023  如果expireDate是空，则根据Settings里的defaultExpireDate来设置。目前settings还没有defaultExpireDate
 
 
-                    // 检查是否有输入为空，如果有则提示用户
-                    if (productName.isEmpty() || category.isEmpty() || expiredDate.isEmpty() || storeLocation.isEmpty() ) {
-                        Toast.makeText(AddFood.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+                // 检查是否有输入为空，如果有则提示用户
+                if (productName.isEmpty() || category.isEmpty() || expiredDate.isEmpty() || storeLocation.isEmpty()) {
+                    Toast.makeText(AddFood.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+                } else {
+                    // 获取当前登录用户的userID
+                    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                    if (currentUser != null) {
+                        String userID = currentUser.getUid();
+                        Toast.makeText(AddFood.this, "UID: " + userID, Toast.LENGTH_SHORT).show();
+
+                        // 创建Food对象
+                        Food food = new Food();
+                        food.setUserID(userID);
+                        food.setFoodName(productName);
+                        food.setCategory(category);
+                        food.setStorageLocation(storeLocation);
+                        food.setStorageCondition(storageCondition);
+                        food.setOpened(isOpened);
+                        food.setAddTime(System.currentTimeMillis());
+                        food.setBestBefore(calculateBestBefore(expiredDate));//如果是0，说明日期格式不对
+
+                        // 异步插入数据库
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                foodDao.insert(food);
+                                finish();
+                            }
+                        }).start();
+
+                        // 提示用户添加成功
+                        Toast.makeText(AddFood.this, "Food added successfully.", Toast.LENGTH_SHORT).show();
+
+                        finish();
+
                     } else {
-                        // 获取当前登录用户的userID
-                        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                        if (currentUser != null) {
-                            String userID = currentUser.getUid();
-                            Toast.makeText(AddFood.this, "UID: " + userID, Toast.LENGTH_SHORT).show();
-
-                            // 创建Food对象
-                            Food food = new Food();
-                            food.setUserID(userID);
-                            food.setFoodName(productName);
-                            food.setCategory(category);
-                            food.setStorageLocation(storeLocation);
-                            food.setStorageCondition(storageCondition);
-                            food.setOpened(isOpened);
-                            food.setAddTime(System.currentTimeMillis());
-                            food.setBestBefore(calculateBestBefore(expiredDate));//如果是0，说明日期格式不对
-
-                            // 异步插入数据库
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    foodDao.insert(food);
-                                    finish();
-                                }
-                            }).start();
-
-                            // 提示用户添加成功
-                            Toast.makeText(AddFood.this, "Food added successfully.", Toast.LENGTH_SHORT).show();
-
-                            finish();
-
-                        } else {
-                            Toast.makeText(AddFood.this, "User not logged in.", Toast.LENGTH_SHORT).show();
-                        }
-
+                        Toast.makeText(AddFood.this, "User not logged in.", Toast.LENGTH_SHORT).show();
                     }
 
+                }
 
 
             }
@@ -273,7 +282,22 @@ public class AddFood extends AppCompatActivity {
     private long calculateBestBefore(String expiredDate) {
         // 校验expiredDate是否合法
         if (expiredDate == null || expiredDate.isEmpty()) {
+//            freshPalDB.userDao().getUserSettings(userID).getDefaultReminderTime();
+            Toast.makeText(AddFood.this, "Please enter a valid date.", Toast.LENGTH_SHORT).show();
             return 0;
+        }
+
+        // 如果isOpened，则重新计算bestbefore，使用settings里面的defaultOpenExpireTime。比如如果defaultOpenExpireTime是3天，则bestBefore = 当前日期 + 3天
+        if (foodOpenedStatus.isChecked()) {
+
+            if (user.getDefaultOpenExpireTime() == 0) {
+                return 0;
+            } else {
+                // 获取当前日期
+                final Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.DATE, user.getDefaultOpenExpireTime());
+                return calendar.getTimeInMillis();
+            }
         }
 
         //把expiredDate转换成long类型，也就是时间戳。例如，19/01/2000的00:00:00，转换成 UNIX 时间戳，UNIX 时间戳是从 1970 年 1 月 1 日 00:00:00（UTC）起经过的秒数。
@@ -307,6 +331,19 @@ public class AddFood extends AppCompatActivity {
 
         // 将适配器与spinner绑定
         storageConditionSpinner.setAdapter(adapter);
+    }
+
+    // 读取数据库中的user数据
+    private User getUserData() {
+        // 异步读取数据库
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                user = freshPalDB.userDao().getUserData(userID);
+            }
+        }).start();
+
+        return user;
     }
 
 

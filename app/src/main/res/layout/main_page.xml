@@ -194,7 +194,9 @@
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/add_nav"
+            >
 
             <ImageView
                 android:id="@+id/imageButton_add"
