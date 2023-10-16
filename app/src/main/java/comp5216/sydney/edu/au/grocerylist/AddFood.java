@@ -83,7 +83,7 @@ public class AddFood extends AppCompatActivity {
         homeNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AddFood.this, MainActivity.class);
+                Intent intent = new Intent(AddFood.this, MainPage.class);
                 startActivity(intent);
             }
         });

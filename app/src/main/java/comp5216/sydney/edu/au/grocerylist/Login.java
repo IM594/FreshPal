@@ -124,7 +124,13 @@ public class Login extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                if (!isUserInLocalDatabase(user.getUid())) {
+                //存在但是email未经过加密
+                if (isUserInLocalDatabase(user.getUid()) && userDao.getUserById(user.getUid()).getEmail().equals(user.getEmail())) {
+                    // 更新email为加密后的
+                    String encryptedEmail = EmailEncryptor.encryptEmail(user.getEmail(), Login.this);
+                    userDao.updateEmail(user.getUid(), encryptedEmail);
+                }
+                if (!isUserInLocalDatabase(user.getUid()) ) {
                     User newUser = new User();
                     newUser.setUserID(user.getUid());
                     newUser.setUsername(user.getDisplayName());

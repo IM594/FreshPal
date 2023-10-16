@@ -19,6 +19,10 @@ public interface UserDao {
     void updateUser(User user);
     // 添加其他用户相关的查询和操作方法
 
+    //更新email
+    @Query("UPDATE user_table SET email = :email WHERE userID = :userID")
+    void updateEmail(String userID, String email);
+
     //getUserData
     @Query("SELECT * FROM user_table WHERE userID = :userID")
     User getUserData(String userID);
