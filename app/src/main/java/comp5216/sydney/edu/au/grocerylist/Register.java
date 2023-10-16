@@ -109,7 +109,8 @@ public class Register extends AppCompatActivity {
                             User localUser = new User();
                             localUser.setUserID(user.getUid()); // 使用 Firebase 用户ID
                             localUser.setUsername(mFullName.getText().toString()); // 使用 mFullName 中的文本作为用户名
-                            localUser.setEmail(email);
+                            String encryptedEmail = EmailEncryptor.encryptEmail(email, getApplicationContext());
+                            localUser.setEmail(encryptedEmail);
                             localUser.setReminderEnabled(false); // 设置其他字段
 
 
