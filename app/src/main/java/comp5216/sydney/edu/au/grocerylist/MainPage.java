@@ -133,7 +133,7 @@ public class MainPage extends AppCompatActivity implements
                 Log.i("MainPage", "clicked");
                 // 获取点击的food对象
                 Food clickedFood = (Food) mFoodList.getItemAtPosition(position);
-                Toast.makeText(MainPage.this,clickedFood.getFoodName(),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainPage.this,clickedFood.getFoodName(),Toast.LENGTH_SHORT).show();
                 // Intent来启动新的Activity
                 Intent intent = new Intent(MainPage.this, FoodDetail.class);  //当前的Activity和您想要跳转的目标Activity
 
@@ -281,7 +281,7 @@ public class MainPage extends AppCompatActivity implements
 
         // Save filters
         mViewModel.setFilters(filters);
-        showTodoToast();
+//        showTodoToast();
 
         // Set header
         mCurrentSearchView.setText(Html.fromHtml(filters.getSearchDescription(this)));

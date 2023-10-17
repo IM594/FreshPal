@@ -46,7 +46,7 @@ public class Profile extends AppCompatActivity {
         // Decrypt and set the email
 //        email = EmailEncryptor.decryptEmail(encryptedEmail, this);
         userEmailTextView.setText(email);
-        Toast.makeText(this, "email: " + email, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "email: " + email, Toast.LENGTH_SHORT).show();
         CardView changePasswordLayout = findViewById(R.id.change_password_card);
         changePasswordLayout.setOnClickListener(new View.OnClickListener() {
             @Override
