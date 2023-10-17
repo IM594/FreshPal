@@ -5,6 +5,7 @@ package comp5216.sydney.edu.au.grocerylist;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -82,12 +83,11 @@ public class AddFood extends AppCompatActivity {
         freshPalDB = FreshPalDB.getDatabase(getApplicationContext());
         foodDao = freshPalDB.foodDao();
 
-        // 获取user信息
-        user = getUserData();
-
         // 获取userID
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         userID = currentUser.getUid();
+        // 获取user信息
+        user = getUserData();
 
         // 单击homeNav，跳转到MainActivity
         homeNav.setOnClickListener(new View.OnClickListener() {
@@ -171,7 +171,7 @@ public class AddFood extends AppCompatActivity {
 
 
                 // 检查是否有输入为空，如果有则提示用户
-                if (productName.isEmpty() || category.isEmpty() || expiredDate.isEmpty() || storeLocation.isEmpty()) {
+                if (productName.isEmpty() || category.isEmpty() || storeLocation.isEmpty()) {
                     Toast.makeText(AddFood.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
                 } else {
                     // 获取当前登录用户的userID
@@ -282,22 +282,11 @@ public class AddFood extends AppCompatActivity {
     private long calculateBestBefore(String expiredDate) {
         // 校验expiredDate是否合法
         if (expiredDate == null || expiredDate.isEmpty()) {
-//            freshPalDB.userDao().getUserSettings(userID).getDefaultReminderTime();
-            Toast.makeText(AddFood.this, "Please enter a valid date.", Toast.LENGTH_SHORT).show();
-            return 0;
-        }
 
-        // 如果isOpened，则重新计算bestbefore，使用settings里面的defaultOpenExpireTime。比如如果defaultOpenExpireTime是3天，则bestBefore = 当前日期 + 3天
-        if (foodOpenedStatus.isChecked()) {
-
-            if (user.getDefaultOpenExpireTime() == 0) {
-                return 0;
-            } else {
-                // 获取当前日期
-                final Calendar calendar = Calendar.getInstance();
-                calendar.add(Calendar.DATE, user.getDefaultOpenExpireTime());
-                return calendar.getTimeInMillis();
-            }
+            final Calendar calendar = Calendar.getInstance();
+            Log.d("expireddate", "calculateBestBefore: ****************"+(user.getDefaultOpenExpireTime()+1));
+            calendar.add(Calendar.DATE, user.getDefaultOpenExpireTime()+1);
+            return calendar.getTimeInMillis();
         }
 
         //把expiredDate转换成long类型，也就是时间戳。例如，19/01/2000的00:00:00，转换成 UNIX 时间戳，UNIX 时间戳是从 1970 年 1 月 1 日 00:00:00（UTC）起经过的秒数。

@@ -56,10 +56,10 @@ public class Register extends AppCompatActivity {
         freshPalDB = FreshPalDB.getDatabase(getApplicationContext());
         userDao = freshPalDB.userDao();
 
-        if(fAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
-        }
+//        if(fAuth.getCurrentUser() != null){
+//            startActivity(new Intent(getApplicationContext(), MainPage.class));
+//            finish();
+//        }
 
         mRegisterBtn.setOnClickListener(new View.OnClickListener(){
             @Override
