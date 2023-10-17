@@ -172,13 +172,13 @@ public class AddFood extends AppCompatActivity {
 
                 // 检查是否有输入为空，如果有则提示用户
                 if (productName.isEmpty() || category.isEmpty() || storeLocation.isEmpty()) {
-                    Toast.makeText(AddFood.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddFood.this, "Please fill in all fields.(except expire date)", Toast.LENGTH_SHORT).show();
                 } else {
                     // 获取当前登录用户的userID
                     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                     if (currentUser != null) {
                         String userID = currentUser.getUid();
-                        Toast.makeText(AddFood.this, "UID: " + userID, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(AddFood.this, "UID: " + userID, Toast.LENGTH_SHORT).show();
 
                         // 创建Food对象
                         Food food = new Food();

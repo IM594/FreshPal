@@ -88,11 +88,12 @@ public class FoodAdapter extends BaseAdapter {
         }
         viewHolder.switchOpened.setChecked(foodList.get(position).isOpened());
         if (expireTime >= 0 && expireTime <= 1) {
-            viewHolder.expiredDays.setTextColor(Color.RED);
+            viewHolder.expiredDays.setTextColor(context.getResources().getColor(R.color.colorRed));
         } else if (expireTime > 1 && expireTime <= 3) {
-            viewHolder.expiredDays.setTextColor(Color.parseColor("#f7e405"));
+//            viewHolder.expiredDays.setTextColor(Color.parseColor("#f7e405"));
+            viewHolder.expiredDays.setTextColor(context.getResources().getColor(R.color.colorAccent));
         } else if (expireTime > 3) {
-            viewHolder.expiredDays.setTextColor(Color.GREEN);
+            viewHolder.expiredDays.setTextColor(context.getResources().getColor(R.color.colorHealthy));
         } else if (expireTime < 0) {
             viewHolder.expiredDays.setTextColor(Color.BLACK);
         }

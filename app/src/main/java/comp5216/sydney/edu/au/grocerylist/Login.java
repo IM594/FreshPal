@@ -129,7 +129,7 @@ public class Login extends AppCompatActivity {
         });
     }
     private void handleLoginSuccess(FirebaseUser user) {
-        Toast.makeText(Login.this, getString(R.string.login_complete), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(Login.this, getString(R.string.login_complete), Toast.LENGTH_SHORT).show();
 
         // 在登录成功后，检查本地数据库中是否已存在具有相同用户ID的用户信息
         // 如果不存在且云端数据中没有，则将用户信息异步插入到本地数据库中
