@@ -9,8 +9,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Query;
 
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -60,13 +65,16 @@ public class MainPage extends AppCompatActivity implements
     private FilterDialogFragment mFilterDialog;
     private FreshPalDB mdb;
     private FoodDao mFoodDao;
-    //private UserDao mUserDao;
+    private UserDao mUserDao;
     private FoodAdapter foodadapter;
     private MainPageViewModel mViewModel;
     private List<String> categorySpinner;
     private List<String> StorageSpinner;
     private List<String> foodNameSpinner;
     private List<Food> foodsFromDB;
+    private int defaultOpenExpireTime;
+    private int AutoSyncTime = 1;//day
+    private int ManulSyncTime = 20;//min
 
 
     @Override
@@ -95,6 +103,7 @@ public class MainPage extends AppCompatActivity implements
         //初始化数据库相关
         mdb = FreshPalDB.getDatabase(this.getApplication().getApplicationContext());
         mFoodDao = mdb.foodDao();
+        mUserDao = mdb.userDao();
         //mUserDao = mdb.userDao();
         //从数据库中读取food数据并显示mlistview
         readFoodFromDatabase();
@@ -111,6 +120,10 @@ public class MainPage extends AppCompatActivity implements
         FirebaseFirestore.setLoggingEnabled(true);
         // Initialize Firestore
         mFirestore = FirebaseFirestore.getInstance();
+        //auto sync
+        checkAndAutoSync();
+        //update icon
+        checkSyncStatusAndUpdateIcon();
     }
 
     private void setupListViewListener() {
@@ -120,12 +133,13 @@ public class MainPage extends AppCompatActivity implements
                 Log.i("MainPage", "clicked");
                 // 获取点击的food对象
                 Food clickedFood = (Food) mFoodList.getItemAtPosition(position);
-                Toast.makeText(MainPage.this,clickedFood.getFoodName(),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainPage.this,clickedFood.getFoodName(),Toast.LENGTH_SHORT).show();
                 // Intent来启动新的Activity
                 Intent intent = new Intent(MainPage.this, FoodDetail.class);  //当前的Activity和您想要跳转的目标Activity
 
                 if (intent != null) {
                     // (可选) 将food对象或其属性作为额外数据放入intent中
+                    intent.putExtra("defaultTime", defaultOpenExpireTime);
                     intent.putExtra("userID", userID);
                     intent.putExtra("foodID", clickedFood.getFoodID());
                     intent.putExtra("foodName", clickedFood.getFoodName());
@@ -149,6 +163,7 @@ public class MainPage extends AppCompatActivity implements
                 public void run() {
                     //从数据库中获取food数据
                     foodsFromDB = mFoodDao.getFoodsByUserId(userID);
+                    defaultOpenExpireTime = mUserDao.getDefaultOpenExpireTime(userID);
                     Log.i(TAG, "$$$$$$$$$$$$$$ "+foodsFromDB.size());
                     foodNameSpinner = mFoodDao.getDistinctFoodName(userID);
                     categorySpinner = mFoodDao.getDistinctCategories(userID);
@@ -266,7 +281,7 @@ public class MainPage extends AppCompatActivity implements
 
         // Save filters
         mViewModel.setFilters(filters);
-        showTodoToast();
+//        showTodoToast();
 
         // Set header
         mCurrentSearchView.setText(Html.fromHtml(filters.getSearchDescription(this)));
@@ -296,10 +311,7 @@ public class MainPage extends AppCompatActivity implements
 
 
     //---------------------同步（start）
-
-
-    // 点击同步按钮
-    private void onSyncClicked(View view) {
+    private void Syncoperation(){
         new Thread(() -> {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             String userId = FirebaseAuth.getInstance().getUid();
@@ -359,12 +371,16 @@ public class MainPage extends AppCompatActivity implements
                                         // 更新UI或显示消息
                                         runOnUiThread(() -> {
                                             Toast.makeText(MainPage.this, "Sync completed.", Toast.LENGTH_SHORT).show();
+                                            findViewById(R.id.sync).setVisibility(View.GONE);
+                                            findViewById(R.id.sync_status).setVisibility(View.VISIBLE);
                                         });
                                     })
                                     .addOnFailureListener(e -> {
                                         // 处理同步失败
                                         runOnUiThread(() -> {
                                             Toast.makeText(MainPage.this, "Sync failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            findViewById(R.id.sync).setVisibility(View.VISIBLE);
+                                            findViewById(R.id.sync_status).setVisibility(View.GONE);
                                         });
                                     });
                         })
@@ -376,6 +392,11 @@ public class MainPage extends AppCompatActivity implements
                         });
             }
         }).start();
+    }
+
+    // 点击同步按钮
+    private void onSyncClicked(View view) {
+        Syncoperation();
     }
 
 
@@ -401,7 +422,7 @@ public class MainPage extends AppCompatActivity implements
         List<Food> localFoods = new ArrayList<>();
         Thread thread = new Thread(() -> {
             FoodDao foodDao = mdb.foodDao();
-            localFoods.addAll(foodDao.getAllFood());
+            localFoods.addAll(foodDao.getFoodsByUserId(userID));
         });
         thread.start();
         try {
@@ -428,4 +449,88 @@ public class MainPage extends AppCompatActivity implements
     @Override
     public void onClick(View view) {
     }
+
+    // 加入icon的出现与消失
+    private void checkSyncStatusAndUpdateIcon() {
+        new Thread(() -> {
+            User currentUser = mUserDao.getUserData(userID);
+            if(currentUser == null){
+                return;
+            }
+            Long lastSyncTime = currentUser.getLastSyncTime();
+            if (lastSyncTime == null||lastSyncTime == 0) {
+                // 如果lastSyncTime为null
+                updateIconVisibility(true);
+            } else {
+                long currentTimeMillis = System.currentTimeMillis();
+                long daysDifference = (currentTimeMillis - lastSyncTime) / (1000 * 60 * 60 * 24);
+                long minDirrerence = (currentTimeMillis - lastSyncTime) / (1000 * 60);
+                if (minDirrerence > ManulSyncTime) {
+                    // 如果lastSyncTime距离今天超过20min
+                    updateIconVisibility(true);
+                } else {
+                    updateIconVisibility(false);
+                }
+            }
+        }).start();
+    }
+
+    private void updateIconVisibility(boolean showSyncIcon) {
+        runOnUiThread(() -> {
+            if (showSyncIcon) {
+                findViewById(R.id.sync).setVisibility(View.VISIBLE);
+                findViewById(R.id.sync_status).setVisibility(View.GONE);
+            } else {
+                findViewById(R.id.sync).setVisibility(View.GONE);
+                findViewById(R.id.sync_status).setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    // 新增方法: 检查条件并决定是否自动同步
+    private void checkAndAutoSync() {
+        new Thread(() -> {
+            User currentUser = mUserDao.getUserData(userID);
+            if(currentUser==null){
+                return;
+            }
+            Long lastSyncTime = currentUser.getLastSyncTime();
+            if (lastSyncTime != null) {
+                long currentTimeMillis = System.currentTimeMillis();
+                long daysDifference = (currentTimeMillis - lastSyncTime) / (1000 * 60 * 60 * 24);
+                long minDirrerence = (currentTimeMillis - lastSyncTime) / (1000 * 60);
+                if (daysDifference > AutoSyncTime && isBatteryAbove80() && isConnectedToWiFi()) {
+                    // 如果满足条件，自动调用同步操作
+                    Syncoperation();
+                }else{
+                    runOnUiThread(() -> {
+                        if (!isConnectedToWiFi()) {
+                            Toast.makeText(MainPage.this, "Auto Sync failed: Not connect WIFI", Toast.LENGTH_SHORT).show();
+                        } else if (!isBatteryAbove80()) {
+                            Toast.makeText(MainPage.this, "Auto Sync failed: Battery lower 80%", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        }).start();
+    }
+
+    // 新增方法: 检查电池电量是否大于80%
+    private boolean isBatteryAbove80() {
+        BatteryManager batteryManager = (BatteryManager) getSystemService(Context.BATTERY_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            int battery = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
+            return battery > 80;
+        }
+        return false;
+    }
+
+    // 新增方法: 检查是否连接到WiFi
+    private boolean isConnectedToWiFi() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.getType() == ConnectivityManager.TYPE_WIFI && activeNetwork.isConnected();
+    }
+
+
 }

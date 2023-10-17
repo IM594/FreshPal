@@ -69,4 +69,6 @@
     <color name="greyPrimary">#DE000000</color>
     <color name="greySecondary">#8B000000</color>
     <color name="greyDisabled">#61000000</color>
+    <color name="colorHealthy">#00C957</color>
+    <color name="colorRed">#E3170D</color>
 </resources>
