@@ -63,4 +63,5 @@ public interface FoodDao {
     //get all food
     @Query("SELECT * FROM food_table")
     List<Food> getAllFood();
+
 }

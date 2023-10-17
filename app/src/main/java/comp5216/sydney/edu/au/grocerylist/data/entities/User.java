@@ -27,7 +27,7 @@ public class User {
     @ColumnInfo(name = "defaultReminderTime")
     private long defaultReminderTime;
 
-    @ColumnInfo(name = "defaultOpenExpireTime")
+    @ColumnInfo(name = "defaultOpenExpireTime", defaultValue = "3")
     private int defaultOpenExpireTime;
     // 其他字段
     @ColumnInfo(name = "lastSyncTime")

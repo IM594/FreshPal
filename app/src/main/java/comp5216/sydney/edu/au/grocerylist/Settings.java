@@ -72,7 +72,7 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Navigate to MainActivity
-                Intent intent = new Intent(Settings.this, MainActivity.class);
+                Intent intent = new Intent(Settings.this, MainPage.class);
                 startActivity(intent);
             }
         });
