@@ -171,6 +171,7 @@ public class OCRImageProcessingActivity extends AppCompatActivity {
     static {
         DATE_FORMATS.put("\\d{1,2}/\\d{1,2}/\\d{4}", "dd/MM/yyyy"); // 格式：01/02/2023
         DATE_FORMATS.put("\\d{1,2}-\\d{1,2}-\\d{4}", "dd-MM-yyyy"); // 格式：01-02-2023
+        // TODO: 17/10/2023  
         DATE_FORMATS.put("\\d{1,2} \\w{3} \\d{4}", "dd MMM yyyy"); // 格式：01 Jan 2023
         DATE_FORMATS.put("\\d{4}-\\d{1,2}-\\d{1,2}", "yyyy-MM-dd"); // 格式：2023-01-02
         DATE_FORMATS.put("\\w{3} \\d{1,2}, \\d{4}", "MMM dd, yyyy"); // 格式：Jan 01, 2023

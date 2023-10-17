@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GroceryList</string>
+    <string name="app_name">FreshPal</string>
     <!-- Login Activity -->
     <string name="email_required">Email is required.</string>
     <string name="password_required">Password is required.</string>
