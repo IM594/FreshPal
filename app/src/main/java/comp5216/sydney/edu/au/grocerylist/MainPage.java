@@ -32,6 +32,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.WriteBatch;
+import com.google.firebase.perf.FirebasePerformance;
+import com.google.firebase.perf.metrics.Trace;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -120,6 +122,9 @@ public class MainPage extends AppCompatActivity implements
         FirebaseFirestore.setLoggingEnabled(true);
         // Initialize Firestore
         mFirestore = FirebaseFirestore.getInstance();
+
+        FirebasePerformance.getInstance().setPerformanceCollectionEnabled(true);
+
         //auto sync
         checkAndAutoSync();
         //update icon
@@ -312,6 +317,9 @@ public class MainPage extends AppCompatActivity implements
 
     //---------------------同步（start）
     private void Syncoperation(){
+
+        Trace myTrace = FirebasePerformance.getInstance().newTrace("sync_trace");
+        myTrace.start();
         new Thread(() -> {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             String userId = FirebaseAuth.getInstance().getUid();
@@ -392,6 +400,9 @@ public class MainPage extends AppCompatActivity implements
                         });
             }
         }).start();
+
+        myTrace.stop();
+
     }
 
     // 点击同步按钮
