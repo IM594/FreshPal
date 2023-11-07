@@ -1,1 +1,1 @@
-    # COMP5216-19
+    # FreshPal Android APP
